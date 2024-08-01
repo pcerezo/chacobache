@@ -14,4 +14,7 @@ body {
 .content section {
     margin-bottom: 2rem;
 }
-  
+
+p.content {
+    font-size: 20px;
+}

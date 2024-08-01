@@ -1,0 +1,49 @@
+.content {
+    padding: 20px;
+}
+
+h2.content{
+    font-size: 2.5rem;
+    color: #2a4dac;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+h2.content::after{
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 5px;
+    background-color: #000000;
+    bottom: -10px;
+    left: 25%;
+    border-radius: 5px;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.inicio:hover h2.content::after {
+    width: 100%;
+    left: 0;
+}
+
+p.content {
+    font-family: 'Poppins', sans-serif;
+}
+
+.letra_servicio {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+
+    border-top: 1px;
+    border-bottom: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: double;
+    border-color: #000000;
+}

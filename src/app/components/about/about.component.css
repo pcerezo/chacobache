@@ -22,7 +22,7 @@ h2.content::after{
     transition: width 0.3s ease, left 0.3s ease;
 }
 
-section:hover h2.content::after {
+.inicio:hover h2.content::after {
     width: 100%;
     left: 0;
 }
