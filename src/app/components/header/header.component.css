@@ -24,7 +24,9 @@
 .qr-code {
     width: 150px;
     height: 150px;
-    margin: 50px;
+    /*margin: 50px;
+    background: url('/assets/qrcode.png') no-repeat center center;
+    background-size: cover; */
 }
 
 .navbar-nav {
