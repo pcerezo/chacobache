@@ -18,3 +18,42 @@ body {
 p.content {
     font-size: 20px;
 }
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+}
+
+.footer {
+    background-color: #e9ecef;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: #fff; /* Puedes cambiar esto a cualquier color que quieras para el estado activo */
+}
