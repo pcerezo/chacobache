@@ -1,0 +1,12 @@
+.integrante {
+    padding-inline: 20%;
+    padding-top: 1%;
+}
+
+.integrante > h2 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+img {
+    max-width: 15%;
+}

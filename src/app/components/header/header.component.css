@@ -1,0 +1,34 @@
+.header {
+    height: 200px;
+    background: url('/assets/header/chacobache_banner.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.subtitle {
+    font-weight: bold;
+    font-size: medium;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #888888;
+}
+
+.logo-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: url('/assets/header/chacobache_profile.jpg') no-repeat center center;
+    background-size: cover;
+    margin-left: 50px;
+}
+
+.qr-code {
+    width: 150px;
+    height: 150px;
+    /*margin: 50px;
+    background: url('/assets/qrcode.png') no-repeat center center;
+    background-size: cover; */
+}
+
+.navbar-nav {
+    margin-left: 17%;
+}
