@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AboutComponent } from "../about/about.component";
-import { ServicesComponent } from "../services/services.component";
+import { ServicesComponent } from "../../services/services.component";
 import { ProgramComponent } from "../program/program.component";
 
 @Component({
