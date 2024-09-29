@@ -57,3 +57,5 @@ footer {
     font-weight: bold;
     color: #fff; /* Puedes cambiar esto a cualquier color que quieras para el estado activo */
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

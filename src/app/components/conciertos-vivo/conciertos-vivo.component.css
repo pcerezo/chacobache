@@ -1,0 +1,18 @@
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+/* Ajustar la altura del contenedor principal para las imágenes */
+#selected-image-container img {
+    max-height: 400px;
+    width: auto;
+}

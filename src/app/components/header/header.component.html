@@ -17,6 +17,22 @@
             <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/inicio']">Inicio</a>
             <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/integrantes']">Nuestros integrantes</a>
             <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/eventos']">Eventos</a>
+            
+            <!-- Botón para desplegar opciones -->
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Multimedia
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" routerLink="/conciertosEnVivo">Conciertos en vivo</a></li>
+                    <li><a class="dropdown-item" routerLink="/otrasProducciones">Otras producciones</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" routerLink="/blogNoticias">Blog y noticias</a></li>
+                </ul>
+            </div>
+
+            <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/contacto']">Contacto, soporte, FAQ...</a>
+
         </div>
     </div>
 </nav>

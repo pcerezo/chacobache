@@ -1,1 +1,83 @@
-<p>events works!</p>
+<div class="event-container">
+
+    <!-- Título -->
+    <h1 class="event-title">Próximos Eventos</h1>
+    @if(eventosFuturos.length > 0) {
+      <div class="event-list">
+        @for (evento of eventosFuturos; track $index) {
+          <mat-card class="event-card">
+            <mat-card-header>
+              <div mat-card-avatar class="event-avatar"></div>
+              <mat-card-title>{{ evento.lugar }}</mat-card-title>
+              <mat-card-subtitle>{{ evento.fecha | date }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ evento.descripcion }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <a mat-button *ngIf="evento.enlace_entradas" href="{{ evento.enlace_entradas }}" target="_blank">
+                Comprar Entradas
+              </a>
+              <a mat-button *ngIf="evento.enlace_pdf" href="{{ evento.enlace_pdf }}" target="_blank">
+                Descargar Programa
+              </a>
+            </mat-card-actions>
+          </mat-card>
+        }
+      </div>
+    }
+    @else {
+      <div class="event-list">
+        <mat-card class="event-card">
+          <mat-card-header>
+            <mat-card-title>Próximamente</mat-card-title>
+            <!-- <mat-card-subtitle>{{ evento.fecha | date }}</mat-card-subtitle> -->
+          </mat-card-header>
+          <mat-card-content>
+            <p>Nuevos eventos en camino... 🚀</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+  
+    <!-- División entre eventos futuros y pasados -->
+    <div id="separador"></div>
+
+
+    <h1 class="event-title">Eventos Pasados</h1>
+    <div class="event-list">
+      @for (evento of eventosPasados; track $index) {
+        <mat-card class="event-card">
+          <mat-card-header>
+            <div mat-card-avatar class="event-avatar"></div>
+            <mat-card-title>{{ evento.lugar }}</mat-card-title>
+            <mat-card-subtitle>{{ evento.fecha | date }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ evento.descripcion }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            @if(evento.enlace_entradas) {
+              <a mat-button href="{{ evento.enlace_entradas }}" target="_blank">
+                ¡Compra tus entradas!
+              </a>
+            }
+            @else {
+              <p>Entrada gratuita</p>
+            }
+            @if(evento.enlace_pdf) {
+              <a mat-button href="{{ evento.enlace_pdf }}" target="_blank">
+                Descargar Programa
+              </a>
+            }
+            @if(evento.multimedia) {
+              <a mat-button *ngIf="evento.multimedia" href="{{ evento.multimedia }}" target="_blank">
+                Ver Multimedia
+              </a>
+            }
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  </div>
+  
