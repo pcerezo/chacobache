@@ -1,15 +1,22 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Evento } from '../../models/evento';
+import { EventsService } from '../../services/events.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { MultimediaService } from '../../services/multimedia.service';
 
 @Component({
   selector: 'app-conciertos-vivo',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule, CommonModule],
   templateUrl: './conciertos-vivo.component.html',
-  styleUrl: './conciertos-vivo.component.css'
+  styleUrl: './conciertos-vivo.component.css',
+  providers: [EventsService]
 })
 export class ConciertosVivoComponent {
   // Imagen seleccionada para mostrar en grande
   selectedImage: string = 'https://via.placeholder.com/800x400'; // Imagen por defecto
+  eventosPasados: Evento[] = [];
 
   // Thumbnails para el carousel
   thumbnails = [
@@ -24,7 +31,11 @@ export class ConciertosVivoComponent {
   // ViewChild to manipulate the image element for fade-in effect
   @ViewChild('selectedImageElement', { static: true }) selectedImageElement!: ElementRef<HTMLImageElement>;
 
-  constructor() {}
+  constructor(
+    private eventsService: EventsService, 
+    private multimediaService: MultimediaService) {
+    this.getEventosPasadosConMultimedia();
+  }
 
   ngAfterViewInit(): void {
     // Optionally, manipulate the DOM after the view is initialized if necessary
@@ -40,5 +51,15 @@ export class ConciertosVivoComponent {
       this.selectedImage = fullImage; // Change the image source
       this.selectedImageElement.nativeElement.classList.add('show'); // Fade-in animation
     }, 200);
+  }
+
+  getEventosPasadosConMultimedia() {
+    this.eventsService.getEventosPasados().subscribe((eventos) => {
+      this.eventosPasados = eventos;
+    });
+  }
+
+  getMultimediaByEventoId(id_evento: number) {
+   //this.multimediaService.getMultimediaByEventoId(id_evento).subscribe();
   }
 }

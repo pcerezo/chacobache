@@ -28,7 +28,9 @@
 }
   
 .event-avatar {
-    background-color: #3f51b5;
+    /*background-color: #3f51b5;*/
+    background: url('/assets/utils/chacheEstrellita.png');
+    background-size: contain;
 }
   
 mat-card-title,

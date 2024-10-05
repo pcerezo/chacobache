@@ -1,28 +1,37 @@
 <div class="container mt-5">
-    <!-- Título del evento -->
-    <h2 class="text-center">Fotografías y Vídeos del Evento</h2>
-  
-    <!-- Imagen principal seleccionada -->
-    <div id="selected-image-container" class="d-flex justify-content-center mt-4">
-        <img #selectedImageElement id="selected-image" [src]="selectedImage" class="img-fluid fade-in" alt="Imagen seleccionada">
-    </div>
-  
-    <!-- Carousel de miniaturas -->
-    <div id="carouselThumbnails" class="carousel slide mt-4" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row">
-                    @for (thumbnail of thumbnails; track $index) {
-                        <div class="col-md-3">
-                            <img [src]="thumbnail.src" class="d-block w-100 img-thumbnail clickable"
-                                [attr.data-full-image]="thumbnail.fullImage"
-                                (click)="onThumbnailClick(thumbnail.fullImage)"
-                                alt="...">
-                        </div>
-                    }
+
+    <!-- Por cada evento, si tiene material multimedia, se muestra-->
+    @if (eventosPasados.length == 0) {
+        <h2 class="text-center">Pronto desvelaremos recuerdos de nuestros eventos</h2>
+    }
+    @for (evento of eventosPasados; track $index) {
+    <div class="multimedia-evento mt-5">
+        <!-- Título del evento -->
+        <h2 class="text-center">{{evento.lugar}} - {{evento.fecha | date}}</h2>
+    
+        <!-- Imagen principal seleccionada -->
+        <div id="selected-image-container" class="d-flex justify-content-center mt-4">
+            <img #selectedImageElement id="selected-image" [src]="selectedImage" class="img-fluid fade-in" alt="Imagen seleccionada">
+        </div>
+    
+        <!-- Carousel de miniaturas -->
+        <div id="carouselThumbnails" class="carousel slide mt-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        @for (thumbnail of thumbnails; track $index) {
+                            <div class="col-md-3">
+                                <img [src]="thumbnail.src" class="d-block w-100 img-thumbnail clickable"
+                                    [attr.data-full-image]="thumbnail.fullImage"
+                                    (click)="onThumbnailClick(thumbnail.fullImage)"
+                                    alt="...">
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    }
 </div>
   

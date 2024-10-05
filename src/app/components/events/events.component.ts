@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import { EventsService } from '../../services/events.service';
 import { HttpClient, HttpClientModule, withFetch } from '@angular/common/http';
+import { Evento } from '../../models/evento';
 
 @Component({
   selector: 'app-events',
@@ -13,8 +14,8 @@ import { HttpClient, HttpClientModule, withFetch } from '@angular/common/http';
   providers: [EventsService]
 })
 export class EventsComponent {
-  eventosFuturos: any[] = [];
-  eventosPasados: any[] = [];
+  eventosFuturos: Evento[] = [];
+  eventosPasados: Evento[] = [];
 
   constructor(private eventsService: EventsService) {
     eventsService.getEventosFuturos().subscribe((eventos) => {

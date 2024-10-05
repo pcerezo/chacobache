@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EventsService {
-  private apiUrl = "http://localhost:5000/api/";
+  private apiUrl = "http://localhost:5000/api/eventos/";
 
   constructor(private http: HttpClient) { }
 
@@ -16,5 +16,9 @@ export class EventsService {
 
   getEventosPasados(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + "historialEventosPasados");
+  }
+
+  getEventosPasadosConMultimedia(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + "historialEventosPasadosMultimedia")
   }
 }
