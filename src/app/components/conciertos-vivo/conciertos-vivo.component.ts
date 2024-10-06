@@ -11,55 +11,96 @@ import { MultimediaService } from '../../services/multimedia.service';
   imports: [HttpClientModule, CommonModule],
   templateUrl: './conciertos-vivo.component.html',
   styleUrl: './conciertos-vivo.component.css',
-  providers: [EventsService]
+  providers: [EventsService, MultimediaService]
 })
 export class ConciertosVivoComponent {
   // Imagen seleccionada para mostrar en grande
-  selectedImage: string = 'https://via.placeholder.com/800x400'; // Imagen por defecto
-  eventosPasados: Evento[] = [];
+  selectedImage: any = 'https://via.placeholder.com/800x400'; // Imagen por defecto
+  tipoSelectedImage: any;
+  eventosPasados: any[] = [];
 
   // Thumbnails para el carousel
-  thumbnails = [
-    { src: 'https://via.placeholder.com/150', fullImage: 'https://via.placeholder.com/800x400' },
-    { src: 'https://via.placeholder.com/150/111', fullImage: 'https://via.placeholder.com/800x400/111' },
-    { src: 'https://via.placeholder.com/150/222', fullImage: 'https://via.placeholder.com/800x400/222' },
-    { src: 'https://via.placeholder.com/150/333', fullImage: 'https://via.placeholder.com/800x400/333' },
-    { src: 'https://via.placeholder.com/150/444', fullImage: 'https://via.placeholder.com/800x400/444' },
-    { src: 'https://via.placeholder.com/150/555', fullImage: 'https://via.placeholder.com/800x400/555' }
-  ];
+  thumbnails: any[] = [];
+  
 
   // ViewChild to manipulate the image element for fade-in effect
-  @ViewChild('selectedImageElement', { static: true }) selectedImageElement!: ElementRef<HTMLImageElement>;
+  @ViewChild('selectedImageElement', { static: false }) selectedImageElement!: ElementRef<HTMLImageElement>;
 
   constructor(
     private eventsService: EventsService, 
     private multimediaService: MultimediaService) {
+  }
+
+  ngOnInit() {
     this.getEventosPasadosConMultimedia();
   }
 
   ngAfterViewInit(): void {
-    // Optionally, manipulate the DOM after the view is initialized if necessary
+    //console.log(this.selectedImageElement.nativeElement);  // Accede al elemento <img>
+
+    // Cambiar algún atributo del elemento, por ejemplo, su clase:
+    if (this.selectedImageElement.nativeElement && this.thumbnails.length > 0) {
+      this.selectedImageElement.nativeElement.src = this.thumbnails[0].enlace;
+      this.selectedImageElement.nativeElement.alt = this.thumbnails[0].descripcion;
+      this.selectedImageElement.nativeElement.classList.add('show'); 
+    }
+
+    if (this.thumbnails[0].enlace.endsWith('.mp4') || this.thumbnails[0].enlace.includes('youtube')) {
+      this.tipoSelectedImage = 'video';
+    }
+    else {
+      this.tipoSelectedImage = 'imagen';
+    }
   }
 
   // Function that handles thumbnail click event
-  onThumbnailClick(fullImage: string): void {
+  onThumbnailClick(imagen: any): void {
     // Remove the fade-in class, then update the image source
-    this.selectedImageElement.nativeElement.classList.remove('show');
+    if (this.selectedImageElement) {
+      this.selectedImageElement.nativeElement.classList.remove('show');
+    }
+
+    if (imagen.enlace.endsWith('.mp4') || imagen.enlace.includes('youtube')) {
+      this.tipoSelectedImage = 'video';
+    }
+    else {
+      this.tipoSelectedImage = 'imagen';
+    }
 
     // Delay the update to synchronize with the fade-out
     setTimeout(() => {
-      this.selectedImage = fullImage; // Change the image source
+      this.selectedImage = imagen; // Change the image source
       this.selectedImageElement.nativeElement.classList.add('show'); // Fade-in animation
+      this.selectedImageElement.nativeElement.alt = imagen.descripcion;
+      this.selectedImageElement.nativeElement.src = imagen.enlace;
     }, 200);
   }
 
   getEventosPasadosConMultimedia() {
-    this.eventsService.getEventosPasados().subscribe((eventos) => {
+    this.eventsService.getEventosPasadosConMultimedia().subscribe((eventos) => {
       this.eventosPasados = eventos;
+
+      for (let i = 0; i < this.eventosPasados.length; i++) {
+        for (let j = 0; j < this.eventosPasados[i].Multimedia.length; j++) {
+          const multimedia = this.eventosPasados[i].Multimedia[j];
+
+          // Determinar si es una imagen o un video en base a la extensión del enlace (por ejemplo)
+          let tipo = 'imagen';  // Valor por defecto
+          if (multimedia.enlace_contenido.endsWith('.mp4') || multimedia.enlace_contenido.includes('youtube')) {
+            tipo = 'video';
+          }
+
+          this.thumbnails.push({
+            enlace: multimedia.enlace_contenido,
+            descripcion: multimedia.descripcion,
+            tipo: tipo
+          });
+        }
+      }
     });
   }
-
+  /*
   getMultimediaByEventoId(id_evento: number) {
-   //this.multimediaService.getMultimediaByEventoId(id_evento).subscribe();
-  }
+   this.multimediaService.getMultimediaByEventoId(id_evento).subscribe();
+  }*/
 }

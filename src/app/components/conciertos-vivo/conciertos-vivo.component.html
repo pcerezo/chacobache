@@ -10,9 +10,18 @@
         <h2 class="text-center">{{evento.lugar}} - {{evento.fecha | date}}</h2>
     
         <!-- Imagen principal seleccionada -->
-        <div id="selected-image-container" class="d-flex justify-content-center mt-4">
-            <img #selectedImageElement id="selected-image" [src]="selectedImage" class="img-fluid fade-in" alt="Imagen seleccionada">
-        </div>
+        <!--@if(tipoSelectedImage == 'imagen') { -->
+            <div id="selected-image-container" class="d-flex justify-content-center mt-4">
+                <img #selectedImageElement id="selected-image" class="img-fluid fade-in" alt="Imagen seleccionada">
+            </div>
+        <!-- }-->
+        <!-- @if(tipoSelectedImage == 'video') {
+            <video controls class="video-fluid">
+                <source #selectedImageElement type="video/mp4">
+                Tu navegador no soporta videos HTML5.
+                </video>
+              <p>{{ selectedImage.descripcion }}</p>
+            } -->
     
         <!-- Carousel de miniaturas -->
         <div id="carouselThumbnails" class="carousel slide mt-4" data-bs-ride="carousel">
@@ -21,10 +30,10 @@
                     <div class="row">
                         @for (thumbnail of thumbnails; track $index) {
                             <div class="col-md-3">
-                                <img [src]="thumbnail.src" class="d-block w-100 img-thumbnail clickable"
-                                    [attr.data-full-image]="thumbnail.fullImage"
-                                    (click)="onThumbnailClick(thumbnail.fullImage)"
-                                    alt="...">
+                                <img [src]="thumbnail.enlace" class="d-block w-100 img-thumbnail clickable"
+                                    [attr.data-full-image]="thumbnail.enlace"
+                                    (click)="onThumbnailClick(thumbnail)"
+                                    [alt]="thumbnail.descripcion">
                             </div>
                         }
                     </div>
