@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { Evento } from '../../models/evento';
 import { EventsService } from '../../services/events.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +28,9 @@ export class ConciertosVivoComponent {
 
   constructor(
     private eventsService: EventsService, 
-    private multimediaService: MultimediaService) {
+    private multimediaService: MultimediaService,
+    private cdr: ChangeDetectorRef
+  ) {
   }
 
   ngOnInit() {
@@ -36,16 +38,16 @@ export class ConciertosVivoComponent {
   }
 
   ngAfterViewInit(): void {
-    //console.log(this.selectedImageElement.nativeElement);  // Accede al elemento <img>
+  }
 
-    // Cambiar algún atributo del elemento, por ejemplo, su clase:
-    if (this.selectedImageElement.nativeElement && this.thumbnails.length > 0) {
+  updateSelectedImageInicial() {
+    if (this.selectedImageElement && this.thumbnails.length > 0) {
       this.selectedImageElement.nativeElement.src = this.thumbnails[0].enlace;
       this.selectedImageElement.nativeElement.alt = this.thumbnails[0].descripcion;
       this.selectedImageElement.nativeElement.classList.add('show'); 
     }
 
-    if (this.thumbnails[0].enlace.endsWith('.mp4') || this.thumbnails[0].enlace.includes('youtube')) {
+    if (this.thumbnails[0] && (this.thumbnails[0].enlace.endsWith('.mp4') || this.thumbnails[0].enlace.includes('youtube'))) {
       this.tipoSelectedImage = 'video';
     }
     else {
@@ -97,6 +99,12 @@ export class ConciertosVivoComponent {
           });
         }
       }
+
+      // Forzar la detección de cambios para que Angular actualice el DOM
+      this.cdr.detectChanges();
+
+      // Ahora que el array está lleno, se carga la primera imagen.
+      this.updateSelectedImageInicial();
     });
   }
   /*
