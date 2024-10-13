@@ -10,18 +10,27 @@
         <h2 class="text-center">{{evento.lugar}} - {{evento.fecha | date}}</h2>
     
         <!-- Imagen principal seleccionada -->
-        <!--@if(tipoSelectedImage == 'imagen') { -->
+        @if(tipoSelectedImage == 'imagen') { 
             <div id="selected-image-container" class="d-flex justify-content-center mt-4">
                 <img #selectedImageElement id="selected-image" class="img-fluid fade-in" alt="Imagen seleccionada">
             </div>
-        <!-- }-->
-        <!-- @if(tipoSelectedImage == 'video') {
-            <video controls class="video-fluid">
-                <source #selectedImageElement type="video/mp4">
-                Tu navegador no soporta videos HTML5.
+        }
+        @if(tipoSelectedImage == 'video') {
+            <p id="selected-image-container" class="d-flex justify-content-center mt-4">
+                <iframe #selectedImageElement width="560" height="315" frameborder="0" 
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </p>
+
+            <!--
+            <div id="selected-image-container" class="d-flex justify-content-center mt-4 row">
+                <video controls class="video-fluid">
+                    <source #selectedImageElement type="video/mp4">
+                    Tu navegador no soporta videos HTML5.
                 </video>
-              <p>{{ selectedImage.descripcion }}</p>
-            } -->
+                <p>{{ selectedImage.descripcion }}</p>
+            </div>
+            -->
+        }
     
         <!-- Carousel de miniaturas -->
         <div id="carouselThumbnails" class="carousel slide mt-4" data-bs-ride="carousel">

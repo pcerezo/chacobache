@@ -18,6 +18,8 @@ export class ConciertosVivoComponent {
   selectedImage: any = 'https://via.placeholder.com/800x400'; // Imagen por defecto
   tipoSelectedImage: any;
   eventosPasados: any[] = [];
+  idSelectedVideo: string = '';
+  raizVideoYt = "https://www.youtube.com/embed/";
 
   // Thumbnails para el carousel
   thumbnails: any[] = [];
@@ -34,6 +36,7 @@ export class ConciertosVivoComponent {
   }
 
   ngOnInit() {
+    this.tipoSelectedImage = 'imagen';
     this.getEventosPasadosConMultimedia();
   }
 
@@ -55,18 +58,74 @@ export class ConciertosVivoComponent {
     }
   }
 
+  getVideoByUrlImagen(url: string) {
+    var result = url.match('(?<=vi\/)(.*?)(?=\/)');
+
+    return result != null? result[0] : '';
+  }
+
+  getThumb(url: string, size: number) {
+    var video, results, thumburl;
+    var tam;
+    
+    if (url === null) {
+        return '';
+    }
+    
+    results = url.match('[\\?&]v=([^&#]*)');
+
+    if (results === null) {
+      return url;
+    }
+    else {
+      video = results[1];
+      this.idSelectedVideo = video;
+
+      switch(size) {
+        case 0:
+        default:
+          tam = "default";
+          break;
+        case 1:
+          tam = "hqdefault";
+          break;
+        case 2:
+          tam = "mqdefault";
+          break;
+        case 3:
+          tam = "sddefault";
+          break;
+        case 4:
+          tam = "maxresdefault";
+          break;
+      }
+    
+      if(tam != null) {
+          thumburl = 'http://img.youtube.com/vi/' + video + '/'+ tam +'.jpg';
+      }else{
+          thumburl = 'http://img.youtube.com/vi/' + video + '/mqdefault.jpg';
+      }
+    
+      return thumburl;
+    }
+  }
+   
+
   // Function that handles thumbnail click event
   onThumbnailClick(imagen: any): void {
+    var enlace: any;
     // Remove the fade-in class, then update the image source
     if (this.selectedImageElement) {
       this.selectedImageElement.nativeElement.classList.remove('show');
     }
 
-    if (imagen.enlace.endsWith('.mp4') || imagen.enlace.includes('youtube')) {
+    if (imagen.enlace.includes('youtube')) {
       this.tipoSelectedImage = 'video';
+      enlace = this.raizVideoYt + this.getVideoByUrlImagen(imagen.enlace);
     }
     else {
       this.tipoSelectedImage = 'imagen';
+      enlace = imagen.enlace;
     }
 
     // Delay the update to synchronize with the fade-out
@@ -74,7 +133,7 @@ export class ConciertosVivoComponent {
       this.selectedImage = imagen; // Change the image source
       this.selectedImageElement.nativeElement.classList.add('show'); // Fade-in animation
       this.selectedImageElement.nativeElement.alt = imagen.descripcion;
-      this.selectedImageElement.nativeElement.src = imagen.enlace;
+      this.selectedImageElement.nativeElement.src = enlace;
     }, 200);
   }
 
@@ -90,6 +149,9 @@ export class ConciertosVivoComponent {
           let tipo = 'imagen';  // Valor por defecto
           if (multimedia.enlace_contenido.endsWith('.mp4') || multimedia.enlace_contenido.includes('youtube')) {
             tipo = 'video';
+            if (multimedia.enlace_contenido.includes('youtube')) {
+              multimedia.enlace_contenido = this.getThumb(multimedia.enlace_contenido, 1);
+            }
           }
 
           this.thumbnails.push({
