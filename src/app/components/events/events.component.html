@@ -1,7 +1,8 @@
 <div class="event-container">
 
-    <!-- Título -->
-    <h1 class="event-title">Próximos Eventos</h1>
+  <!-- Título -->
+  <div id="eventosFuturos">
+    <h1 class="event-title">Próximos eventos</h1>
     @if(eventosFuturos.length > 0) {
       <div class="event-list">
         @for (evento of eventosFuturos; track $index) {
@@ -39,45 +40,152 @@
         </mat-card>
       </div>
     }
-  
-    <!-- División entre eventos futuros y pasados -->
-    <div id="separador"></div>
+  </div>
 
+  <!-- División entre eventos futuros y pasados -->
+  <div id="separador"></div>
 
-    <h1 class="event-title">Eventos Pasados</h1>
+  <div id="eventosPasados">
+    <h1 class="event-title">Eventos realizados</h1>
     <div class="event-list">
-      @for (evento of eventosPasados; track $index) {
-        <mat-card class="event-card">
-          <mat-card-header>
-            <div mat-card-avatar class="event-avatar"></div>
-            <mat-card-title>{{ evento.lugar }}</mat-card-title>
-            <mat-card-subtitle>{{ evento.fecha | date }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>{{ evento.descripcion }}</p>
-          </mat-card-content>
-          <mat-card-actions>
-            @if(evento.enlace_entradas) {
-              <a mat-button href="{{ evento.enlace_entradas }}" target="_blank">
-                ¡Compra tus entradas!
-              </a>
-            }
-            @else {
-              <p>Entrada gratuita</p>
-            }
-            @if(evento.enlace_pdf) {
-              <a mat-button href="{{ evento.enlace_pdf }}" target="_blank">
-                Descargar Programa
-              </a>
-            }
-            <!--@if(evento.multimedia) {
-              <a mat-button *ngIf="evento.multimedia" href="{{ evento.multimedia }}" target="_blank">
-                Ver Multimedia
-              </a>
-            } -->
-          </mat-card-actions>
-        </mat-card>
+      @if(eventosPasados.length > 0) {
+        @for (evento of eventosPasados; track $index) {
+          <mat-card class="event-card">
+            <mat-card-header>
+              <div mat-card-avatar class="event-avatar"></div>
+              <mat-card-title>{{ evento.lugar }}</mat-card-title>
+              <mat-card-subtitle>{{ evento.fecha | date }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ evento.descripcion }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              @if(evento.enlace_entradas) {
+                <a mat-button href="{{ evento.enlace_entradas }}" target="_blank">
+                  ¡Compra tus entradas!
+                </a>
+              }
+              @else {
+                <p>Entrada gratuita</p>
+              }
+              @if(evento.enlace_pdf) {
+                <a mat-button href="{{ evento.enlace_pdf }}" target="_blank">
+                  Descargar Programa
+                </a>
+              }
+              <!--@if(evento.multimedia) {
+                <a mat-button *ngIf="evento.multimedia" href="{{ evento.multimedia }}" target="_blank">
+                  Ver Multimedia
+                </a>
+              } -->
+            </mat-card-actions>
+          </mat-card>
+        }
+      }
+      @else {
+        <div class="event-list">
+          <mat-card class="event-card">
+            <mat-card-header>
+              <mat-card-title>Próximamente...</mat-card-title>
+              <!-- <mat-card-subtitle>{{ evento.fecha | date }}</mat-card-subtitle> -->
+            </mat-card-header>
+            <mat-card-content>
+              <p>Aquí anunciaremos los eventos que hayamos realizado. ¡Estad atentos!🤙</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
       }
     </div>
   </div>
+
+  <div id="separador"></div>
+  <!-- Producciones -->
+  <div id="producciones">
+    <h1 class="event-title">Encuentros de producción</h1>
+    <p class="content">¿Te interesa reunirte con los miembros de Chacobache en un encuentro de producción musical?</p> 
+    <p class="content">Rellena el siguiente formulario y te responderemos lo más prontro posible 👇</p>
+
+    <div class="container mt-5">
+      <h2 class="text-center mat-h2">Formulario de Contacto para Encuentros de Producción Musical</h2>
+    
+      <!--
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="name">Nombre:</label>
+          <input id="name" formControlName="nombre" />
+          <div *ngIf="nombre?.invalid && nombre?.touched">
+            <small *ngIf="nombre?.errors?.['required']">El nombre es obligatorio.</small>
+          </div>
+        </div>
+  
+        <div>
+          <label for="email">Correo:</label>
+          <input id="email" formControlName="email" />
+          <div *ngIf="email?.invalid && email?.touched">
+            <small *ngIf="email?.errors?.['required']">El correo es obligatorio.</small>
+            <small *ngIf="email?.errors?.['email']">Formato de correo no válido.</small>
+          </div>
+        </div>
+  
+        <div>
+          <label for="message">Mensaje:</label>
+          <textarea id="message" formControlName="mensaje"></textarea>
+          <div *ngIf="mensaje?.invalid && mensaje?.touched">
+            <small *ngIf="mensaje?.errors?.['required']">El mensaje es obligatorio.</small>
+            <small *ngIf="mensaje?.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres.</small>
+          </div>
+        </div>
+  
+        <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
+      </form>
+      -->
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-container" novalidate>
+        
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" placeholder="Tu nombre" required>
+          <!-- @if(nombre?.invalid && (nombre?.touched || nombre?.dirty)) { -->
+          <div *ngIf="nombre?.invalid && nombre?.touched">
+            <mat-error>
+              El nombre es requerido.
+            </mat-error>
+          </div>
+          <!--}-->
+        </mat-form-field>
+    
+       
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput formControlName="email" placeholder="Tu correo electrónico" required>
+          <!--@if(email?.invalid && (email?.touched || email?.dirty)) { -->
+          <div *ngIf="email?.invalid && email?.touched">
+            <mat-error>
+              Introduce un correo válido.
+            </mat-error>
+          </div>
+          <!--}-->
+        </mat-form-field>
+    
+       
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Mensaje</mat-label>
+          <textarea matInput formControlName="mensaje" placeholder="Escribe tu mensaje aquí..." rows="5" required></textarea>
+          <!--@if(mensaje?.invalid && (mensaje?.touched || mensaje?.dirty)) { -->
+          <div *ngIf="mensaje?.invalid && mensaje?.touched">
+            <mat-error>
+              El mensaje es requerido.
+            </mat-error>
+          </div>
+          <!--}-->
+        </mat-form-field>
+    
+        
+        <div class="text-center">
+          <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Enviar</button>
+        </div>
+      </form>
+    </div>    
+  </div>
+  
+</div>
   
