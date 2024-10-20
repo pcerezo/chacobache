@@ -86,4 +86,21 @@ button[disabled] {
 button {
     width: 150px;
 }
+
+#producciones {
+    display: grid;
+}
+
+.alert {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    margin-top: 10px;
+    width: fit-content;
+    display: flex;
+    justify-self: center;
+}
+
+.fade.show {
+    opacity: 1; /* Visible cuando se aplica la clase .show */
+}
   

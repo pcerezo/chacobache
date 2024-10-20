@@ -107,40 +107,7 @@
 
     <div class="container mt-5">
       <h2 class="text-center mat-h2">Formulario de Contacto para Encuentros de Producción Musical</h2>
-    
-      <!--
-      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-        <div>
-          <label for="name">Nombre:</label>
-          <input id="name" formControlName="nombre" />
-          <div *ngIf="nombre?.invalid && nombre?.touched">
-            <small *ngIf="nombre?.errors?.['required']">El nombre es obligatorio.</small>
-          </div>
-        </div>
-  
-        <div>
-          <label for="email">Correo:</label>
-          <input id="email" formControlName="email" />
-          <div *ngIf="email?.invalid && email?.touched">
-            <small *ngIf="email?.errors?.['required']">El correo es obligatorio.</small>
-            <small *ngIf="email?.errors?.['email']">Formato de correo no válido.</small>
-          </div>
-        </div>
-  
-        <div>
-          <label for="message">Mensaje:</label>
-          <textarea id="message" formControlName="mensaje"></textarea>
-          <div *ngIf="mensaje?.invalid && mensaje?.touched">
-            <small *ngIf="mensaje?.errors?.['required']">El mensaje es obligatorio.</small>
-            <small *ngIf="mensaje?.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres.</small>
-          </div>
-        </div>
-  
-        <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
-      </form>
-      -->
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-container" novalidate>
-        
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Nombre</mat-label>
           <input matInput formControlName="nombre" placeholder="Tu nombre" required>
@@ -152,7 +119,6 @@
           </div>
           <!--}-->
         </mat-form-field>
-    
        
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Correo electrónico</mat-label>
@@ -165,7 +131,6 @@
           </div>
           <!--}-->
         </mat-form-field>
-    
        
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Mensaje</mat-label>
@@ -178,13 +143,24 @@
           </div>
           <!--}-->
         </mat-form-field>
-    
         
         <div class="text-center">
           <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Enviar</button>
         </div>
       </form>
-    </div>    
+    </div>
+
+    @if(envioExistoso == true) {
+      <div id="envioExitoso" class="alert alert-success fade" role="alert">
+        ¡Envío realizado correctamente! Te responderemos pronto a tu correo.
+      </div>
+    }
+
+    @if(envioErroneo == true) {
+      <div id="envioFallido" class="alert alert-danger fade" role="alert">
+        Ha habido un error con el envío de la información. Revisa tu conexión a internet o inténtalo de nuevo más tarde.
+      </div>
+    }
   </div>
   
 </div>

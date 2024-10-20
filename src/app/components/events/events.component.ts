@@ -22,6 +22,8 @@ export class EventsComponent {
   eventosFuturos: Evento[] = [];
   eventosPasados: Evento[] = [];
   contactForm: FormGroup;
+  envioExistoso: Boolean | undefined;
+  envioErroneo: Boolean | undefined;
 
   constructor(private eventsService: EventsService, private fb: FormBuilder) {
     eventsService.getEventosFuturos().subscribe((eventos) => {
@@ -37,6 +39,9 @@ export class EventsComponent {
       email : new FormControl('', [Validators.required, Validators.email]),
       mensaje : new FormControl ('', [Validators.required])
     });
+
+    this.envioExistoso = undefined;
+    this.envioErroneo = undefined;
   }
 
   get nombre() {
@@ -56,7 +61,15 @@ export class EventsComponent {
     if (this.contactForm.valid) {
       console.log('Formulario enviado:', this.contactForm.value);
       this.eventsService.enviarEmailProduccion(this.contactForm.value).subscribe((resultado) => {
-        console.log("Resultado del envío: " + resultado);
+        if (resultado.status == "200") {
+          this.envioExistoso = true;
+          //this.fadeInAndOut("envioExitoso");
+        }
+        else {
+          this.envioErroneo = true;
+          //this.fadeInAndOut("envioFallido");
+        }
+        console.log("Resultado del envío: " + resultado.message);
       });
       // Aquí puedes añadir la lógica para enviar los datos al backend
     } else {
@@ -64,4 +77,30 @@ export class EventsComponent {
       this.contactForm.markAllAsTouched();  // Marca todos los campos como tocados
     }
   }
+
+  ngAfterViewChecked() {
+    if (this.envioExistoso) {
+      this.fadeInAndOut('envioExitoso');
+    }
+
+    if (this.envioErroneo) {
+      this.fadeInAndOut('envioFallido');
+    }
+  }
+
+  fadeInAndOut(divId: string): void {
+    const element = document.getElementById(divId);
+    this.envioExistoso = undefined;
+    this.envioErroneo = undefined;
+    
+    if (element) {
+        // Asegurar que element tiene tipo HTMLElement para aplicar la clase
+        (element as HTMLElement).classList.add('show');
+
+        // Esperar 5 segundos (5000 milisegundos) antes de desvanecerlo
+        setTimeout(() => {
+            (element as HTMLElement).classList.remove('show');
+        }, 5000); // Cambia este valor para ajustar el tiempo que el div permanece visible
+    }
+}
 }

@@ -22,7 +22,7 @@ export class EventsService {
     return this.http.get<any[]>(this.apiUrl + "historialEventosPasadosMultimedia")
   }
 
-  enviarEmailProduccion(formulario: any): Observable<any[]> {
+  enviarEmailProduccion(formulario: any): Observable<any> {
     return this.http.post<any[]>(this.apiUrl + "solicitudProduccionMusical", formulario);
   }
 }
