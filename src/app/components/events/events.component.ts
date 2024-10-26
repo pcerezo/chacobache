@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-events',
@@ -24,6 +25,7 @@ export class EventsComponent {
   contactForm: FormGroup;
   envioExistoso: Boolean | undefined;
   envioErroneo: Boolean | undefined;
+  enviado: Boolean | undefined;
 
   constructor(private eventsService: EventsService, private fb: FormBuilder) {
     eventsService.getEventosFuturos().subscribe((eventos) => {
@@ -42,6 +44,7 @@ export class EventsComponent {
 
     this.envioExistoso = undefined;
     this.envioErroneo = undefined;
+    this.enviado = false;
   }
 
   get nombre() {
@@ -63,13 +66,19 @@ export class EventsComponent {
       this.eventsService.enviarEmailProduccion(this.contactForm.value).subscribe((resultado) => {
         if (resultado.status == "200") {
           this.envioExistoso = true;
+          this.enviado = true;
           //this.fadeInAndOut("envioExitoso");
         }
         else {
           this.envioErroneo = true;
+          console.log("(resultado) => envioErroneo");
           //this.fadeInAndOut("envioFallido");
         }
         console.log("Resultado del envío: " + resultado.message);
+      },
+      (error) => {
+        this.envioErroneo = true;
+        console.log("error en el envío: " + error);
       });
       // Aquí puedes añadir la lógica para enviar los datos al backend
     } else {
@@ -90,8 +99,6 @@ export class EventsComponent {
 
   fadeInAndOut(divId: string): void {
     const element = document.getElementById(divId);
-    this.envioExistoso = undefined;
-    this.envioErroneo = undefined;
     
     if (element) {
         // Asegurar que element tiene tipo HTMLElement para aplicar la clase
@@ -102,5 +109,7 @@ export class EventsComponent {
             (element as HTMLElement).classList.remove('show');
         }, 5000); // Cambia este valor para ajustar el tiempo que el div permanece visible
     }
-}
+    this.envioExistoso = undefined;
+    this.envioErroneo = undefined;
+  }
 }

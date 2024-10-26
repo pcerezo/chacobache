@@ -1,1 +1,69 @@
-<p>contacto works!</p>
+<div class="faq-container">
+    <h2 class="faq-title">Preguntas Frecuentes</h2>
+    
+    <mat-accordion class="faq-accordion" multi>
+      <!-- Lista de preguntas frecuentes -->
+      <mat-expansion-panel *ngFor="let faq of faqs">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ faq.texto_pregunta }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="faq-respuesta">{{ faq.texto_respuesta }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div id="divFormularioPreguntas">
+        <h1 class="event-title">¿Tienes alguna pregunta que no esté en la lista?</h1>
+        <p class="content">Rellena el siguiente formulario y te responderemos lo más prontro posible 👇</p>
+    
+        <div class="container mt-5">
+          <h2 class="text-center mat-h2">Pregúntanos lo que quieras</h2>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-container" novalidate>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="nombre" placeholder="Tu nombre" required>
+              <!-- @if(nombre?.invalid && (nombre?.touched || nombre?.dirty)) { -->
+              <div *ngIf="nombre?.invalid && nombre?.touched">
+                <mat-error>
+                  El nombre es requerido.
+                </mat-error>
+              </div>
+              <!--}-->
+            </mat-form-field>
+           
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput formControlName="email" placeholder="Tu correo electrónico" required>
+              <!--@if(email?.invalid && (email?.touched || email?.dirty)) { -->
+              <div *ngIf="email?.invalid && email?.touched">
+                <mat-error>
+                  Introduce un correo válido.
+                </mat-error>
+              </div>
+              <!--}-->
+            </mat-form-field>
+           
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Pregunta</mat-label>
+              <textarea matInput formControlName="mensaje" placeholder="Escribe tu pregunta aquí..." rows="5" required></textarea>
+              <!--@if(mensaje?.invalid && (mensaje?.touched || mensaje?.dirty)) { -->
+              <div *ngIf="pregunta?.invalid && pregunta?.touched">
+                <mat-error>
+                  La pregunta es requerida.
+                </mat-error>
+              </div>
+              <!--}-->
+            </mat-form-field>
+            
+            <div class="text-center">
+              @if(enviado != true) {
+                <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Enviar</button>
+              }
+              @else {
+                <button mat-raised-button color="primary" type="submit" disabled>Enviado ✅</button>
+              }
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+  
