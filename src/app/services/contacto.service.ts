@@ -14,4 +14,8 @@ export class ContactoService {
   getPreguntasFrecuentes(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + "preguntasFrecuentes");
   }
+
+  enviarPregunta(formulario: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "enviarPregunta", formulario);
+  }
 }

@@ -9,11 +9,15 @@ import { MatInputModule } from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ContactoService } from '../../services/contacto.service';
 import { PreguntasRespuestas } from '../../models/preguntasRespuestas';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [MatCardModule, MatExpansionModule, CommonModule, HttpClientModule, MatInputModule, MatButtonModule, MatFormFieldModule, ReactiveFormsModule],
+  imports: [MatCardModule, MatExpansionModule, CommonModule, HttpClientModule, 
+    MatInputModule, MatButtonModule, MatFormFieldModule, ReactiveFormsModule,
+    MatCheckboxModule, MatSelectModule],
   templateUrl: './contacto.component.html',
   styleUrl: './contacto.component.css'
 })
@@ -21,6 +25,10 @@ export class ContactoComponent {
   faqs: PreguntasRespuestas[] = [];
   contactForm: FormGroup;
   enviado: Boolean | undefined;
+  envioExitoso: Boolean | undefined;
+  envioErroneo: Boolean | undefined;
+  habilitarEmail: any;
+  selected: any;
 
   constructor(private contactoService: ContactoService, private fb: FormBuilder) {
     this.getPreguntasFrecuentes();
@@ -28,8 +36,12 @@ export class ContactoComponent {
     this.contactForm = this.fb.group({
       nombre : new FormControl('', [Validators.required]),
       email : new FormControl('', [Validators.required, Validators.email]),
-      pregunta : new FormControl ('', [Validators.required])
+      pregunta : new FormControl('', [Validators.required]),
+      habilitarEmail : [false],
+      asunto: new FormControl('', Validators.required)
     });
+
+    this.contactForm.get('email')?.disable();
   }
 
   getPreguntasFrecuentes() {
@@ -54,5 +66,36 @@ export class ContactoComponent {
     return this.contactForm.get("pregunta");
   }
 
-  onSubmit() {}
+  toggleEmailField() {
+    if (this.contactForm.get('habilitarEmail')?.value) {
+      this.contactForm.get('email')?.enable();
+    } else {
+      this.contactForm.get('email')?.disable();
+    }
+  }
+
+  onSubmit() {
+    console.log('Formulario enviado:', this.contactForm.value);
+    if (this.contactForm.valid) {
+      this.contactoService.enviarPregunta(this.contactForm.value).subscribe((resultado) => {
+        if (resultado.status == "200") {
+          this.envioExitoso = true;
+          this.enviado = true;
+        }
+        else {
+          this.envioErroneo = true;
+          console.log("(resultado) => envioErroneo");
+        }
+        console.log("Resultado del envío: " + resultado.message);
+      },
+      (error) => {
+        this.envioErroneo = true;
+        console.log("error en el envío: " + error);
+      });
+      // Aquí puedes añadir la lógica para enviar los datos al backend
+    } else {
+      console.log('Formulario no válido');
+      this.contactForm.markAllAsTouched();  // Marca todos los campos como tocados
+    }
+  }
 }

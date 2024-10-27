@@ -17,11 +17,11 @@
     
         <div class="container mt-5">
           <h2 class="text-center mat-h2">Pregúntanos lo que quieras</h2>
-          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-container" novalidate>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-container d-grid" novalidate>
             <mat-form-field appearance="fill" class="full-width">
+              <!-- NOMBRE -->
               <mat-label>Nombre</mat-label>
               <input matInput formControlName="nombre" placeholder="Tu nombre" required>
-              <!-- @if(nombre?.invalid && (nombre?.touched || nombre?.dirty)) { -->
               <div *ngIf="nombre?.invalid && nombre?.touched">
                 <mat-error>
                   El nombre es requerido.
@@ -29,7 +29,22 @@
               </div>
               <!--}-->
             </mat-form-field>
-           
+            <!-- MOTIVO -->
+            <mat-form-field>
+              <mat-label>Asunto</mat-label>
+              <mat-select formControlName="asunto" required>
+                <mat-option>-- Selecciona un tipo --</mat-option>
+                <mat-option value="contrataciones">Contrataciones</mat-option>
+                <mat-option value="error informático">Error informático</mat-option>
+                <mat-option value="dudas genéricas">Dudas genéricas</mat-option>
+                <mat-option value="otro">Otro...</mat-option>
+              </mat-select>
+            </mat-form-field>            
+
+            <mat-checkbox formControlName="habilitarEmail" (change)="toggleEmailField()">
+              ¿Esperas una respuesta personalizada?
+            </mat-checkbox>
+
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>Correo electrónico</mat-label>
               <input matInput formControlName="email" placeholder="Tu correo electrónico" required>
@@ -44,7 +59,7 @@
            
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>Pregunta</mat-label>
-              <textarea matInput formControlName="mensaje" placeholder="Escribe tu pregunta aquí..." rows="5" required></textarea>
+              <textarea matInput formControlName="pregunta" placeholder="Escribe tu pregunta aquí..." rows="5" required></textarea>
               <!--@if(mensaje?.invalid && (mensaje?.touched || mensaje?.dirty)) { -->
               <div *ngIf="pregunta?.invalid && pregunta?.touched">
                 <mat-error>

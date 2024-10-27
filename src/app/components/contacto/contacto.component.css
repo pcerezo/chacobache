@@ -35,4 +35,8 @@
     padding: 10px;
     line-height: 1.6;
   }
+
+#divFormularioPreguntas {
+  display: grid;
+}
   
