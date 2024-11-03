@@ -1,0 +1,42 @@
+.blog-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.event-card {
+    transition: box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.event-descripcion {
+    color: #555;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.imagen-portada {
+    max-height: 380px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+  
+
+.example-card {
+    max-width: 400px;
+    height: auto;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}

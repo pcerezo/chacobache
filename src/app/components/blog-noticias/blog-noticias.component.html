@@ -1,1 +1,46 @@
-<p>blog-noticias works!</p>
+<div class="container blog-container mt-5">
+    <h1 class="text-center mb-4">Blog y noticias</h1>
+    <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let articulo of articulos">
+            <mat-card class="example-card" appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>{{ articulo.titulo }}</mat-card-title><br>
+                    <mat-card-subtitle><small class="text-muted">{{ articulo.fecha_publicacion | date}}</small></mat-card-subtitle>
+                </mat-card-header>
+                
+                <!--<img mat-card-image src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}"> -->
+                <img mat-card-image class="imagen-portada" src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}">
+                <mat-card-content>
+                    <p>{{ articulo.contenido }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+                </mat-card-actions>
+            </mat-card>
+
+            <!--
+            <mat-card class="event-card">
+            <mat-card-header>
+                <img src="{{ articulo.url_imagen }}" class="card-img-top imagen-portada" alt="imagen de {{ articulo.titulo }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ articulo.titulo }}</h5>
+                    <p class="card-text">{{ articulo.contenido }}</p>
+                    <p class="card-text"><small class="text-muted">{{ articulo.fecha_publicacion }}</small></p>
+                    <a class="btn btn-secondary" routerLink="/proyecto/{{articulo.id}}">Más info</a>
+                </div>
+            </mat-card-header>
+            
+            <mat-card-content>
+                <p class="event-descripcion">{{ articulo.contenido }}</p>
+            </mat-card-content>
+            
+            <mat-card-actions>
+                <a mat-button color="primary" [href]="articulo.id" target="_blank">Ver Más</a>
+            </mat-card-actions>
+            </mat-card>
+            -->
+        </div>
+    </div>
+  </div>
+  

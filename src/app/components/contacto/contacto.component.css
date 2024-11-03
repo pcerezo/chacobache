@@ -1,42 +1,54 @@
 .faq-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .faq-title {
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #3f51b5; /* Color de Material Design */
-  }
-  
-  .faq-accordion .mat-expansion-panel {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .faq-accordion .mat-expansion-panel-header {
-    background-color: #f7f7f7;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .faq-accordion .mat-expansion-panel-header.mat-expanded {
-    background-color: #e8eaf6; /* Color más claro cuando está expandido */
-    color: #3f51b5;
-  }
-  
-  .faq-respuesta {
-    font-size: 1em;
-    color: #555;
-    padding: 10px;
-    line-height: 1.6;
-  }
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.faq-title {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3f51b5; /* Color de Material Design */
+}
+
+.faq-accordion .mat-expansion-panel {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.faq-accordion .mat-expansion-panel-header {
+  background-color: #f7f7f7;
+  font-weight: 600;
+  color: #333;
+}
+
+.faq-accordion .mat-expansion-panel-header.mat-expanded {
+  background-color: #e8eaf6; /* Color más claro cuando está expandido */
+  color: #3f51b5;
+}
+
+.faq-respuesta {
+  font-size: 1em;
+  color: #555;
+  padding: 10px;
+  line-height: 1.6;
+}
 
 #divFormularioPreguntas {
   display: grid;
 }
+
+.alert {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  margin-top: 10px;
+  width: fit-content;
+  display: flex;
+  justify-self: center;
+}
   
+.fade.show {
+  opacity: 1; /* Visible cuando se aplica la clase .show */
+}

@@ -1,12 +1,38 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BlogNoticiasService } from '../../services/blog-noticias.service';
+import { RouterLink } from '@angular/router';
+import { ArticuloBlog } from '../../models/articuloBlog';
 
 @Component({
   selector: 'app-blog-noticias',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, CommonModule, HttpClientModule, MatInputModule, MatButtonModule, MatFormFieldModule, ReactiveFormsModule,
+    RouterLink
+  ],
   templateUrl: './blog-noticias.component.html',
   styleUrl: './blog-noticias.component.css'
 })
 export class BlogNoticiasComponent {
+  articulos: ArticuloBlog[] = [];
 
+  constructor(private blogNoticiasService: BlogNoticiasService) {
+    this.getArticulos();
+  }
+
+  getArticulos() {
+    this.blogNoticiasService.getArticulos().subscribe((respuesta) => {
+      this.articulos = respuesta;
+      //console.log("Preguntas y respuestas: " +  this.faqs[0]);
+    }, 
+    (error) => {
+      console.error("Error en la obtención de los artículos del blog: " + error);
+    });
+  }
 }

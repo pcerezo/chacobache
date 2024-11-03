@@ -79,6 +79,18 @@
             </div>
           </form>
         </div>
+
+        @if(envioExitoso == true) {
+          <div id="envioExitoso" class="alert alert-success fade" role="alert">
+            ¡Envío realizado correctamente! Te responderemos pronto a tu correo.
+          </div>
+        }
+    
+        @if(envioErroneo == true) {
+          <div id="envioFallido" class="alert alert-danger fade" role="alert">
+            Ha habido un error con el envío de la información. Revisa tu conexión a internet o inténtalo de nuevo más tarde.
+          </div>
+        }
     </div>
 </div>
   

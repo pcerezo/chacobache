@@ -98,4 +98,30 @@ export class ContactoComponent {
       this.contactForm.markAllAsTouched();  // Marca todos los campos como tocados
     }
   }
+
+  ngAfterViewChecked() {
+    if (this.envioExitoso) {
+      this.fadeInAndOut('envioExitoso');
+    }
+
+    if (this.envioErroneo) {
+      this.fadeInAndOut('envioFallido');
+    }
+  }
+
+  fadeInAndOut(divId: string): void {
+    const element = document.getElementById(divId);
+    
+    if (element) {
+        // Asegurar que element tiene tipo HTMLElement para aplicar la clase
+        (element as HTMLElement).classList.add('show');
+
+        // Esperar 5 segundos (5000 milisegundos) antes de desvanecerlo
+        setTimeout(() => {
+            (element as HTMLElement).classList.remove('show');
+        }, 5000); // Cambia este valor para ajustar el tiempo que el div permanece visible
+    }
+    this.envioExitoso = undefined;
+    this.envioErroneo = undefined;
+  }
 }

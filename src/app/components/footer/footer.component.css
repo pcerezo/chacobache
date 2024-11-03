@@ -1,5 +1,13 @@
-.footer {
+/*.footer {
     height: 50px;
+}*/
+
+.footer {
+  margin-top: auto;    /* Empuja el footer hacia el final de content-wrapper */
+  padding: 20px;
+  text-align: center;
+  background-color: #333;
+  color: #fff;
 }
 
 /*
