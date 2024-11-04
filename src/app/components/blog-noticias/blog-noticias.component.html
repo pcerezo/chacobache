@@ -11,11 +11,10 @@
                 <!--<img mat-card-image src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}"> -->
                 <img mat-card-image class="imagen-portada" src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}">
                 <mat-card-content>
-                    <p>{{ articulo.contenido }}</p>
+                    <p>{{ articulo.contenido | truncate: 150 }}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                <button mat-button>LIKE</button>
-                <button mat-button>SHARE</button>
+                <button mat-button class="mx-auto">Ver más...</button>
                 </mat-card-actions>
             </mat-card>
 

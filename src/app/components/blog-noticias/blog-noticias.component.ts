@@ -9,12 +9,13 @@ import { MatInputModule } from '@angular/material/input';
 import { BlogNoticiasService } from '../../services/blog-noticias.service';
 import { RouterLink } from '@angular/router';
 import { ArticuloBlog } from '../../models/articuloBlog';
+import { TruncatePipe } from '../../truncate.pipe';
 
 @Component({
   selector: 'app-blog-noticias',
   standalone: true,
   imports: [MatCardModule, CommonModule, HttpClientModule, MatInputModule, MatButtonModule, MatFormFieldModule, ReactiveFormsModule,
-    RouterLink
+    RouterLink, TruncatePipe
   ],
   templateUrl: './blog-noticias.component.html',
   styleUrl: './blog-noticias.component.css'
