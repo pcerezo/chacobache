@@ -1,0 +1,31 @@
+<div class="principal container article-container mt-5">
+    <!-- Título del artículo -->
+    <h1 class="article-title text-center mb-4">{{ articulo?.titulo }}</h1>
+    
+    <!-- Imagen de portada -->
+    <div class="cover-image mb-4">
+        <img [src]="articulo?.url_imagen" alt="{{ articulo?.titulo }}" class="img-fluid rounded imagen-portada mx-auto">
+    </div>
+    
+    <!-- Autor -->
+    <div class="article-author text-center mb-2">
+        <p class="text-muted">Escrito por {{ articulo?.autor }}</p>
+    </div>
+    
+    <!-- Cuerpo del artículo -->
+    <div class="article-body">
+        <p *ngFor="let parrafo of contenidoArray">{{ parrafo }}</p>
+    </div>
+    
+    <!-- Fecha y etiquetas -->
+    <div class="article-footer mt-5 text-muted">
+        <div class="row">
+            <div class="col-md-6">
+                <small>Última actualización: {{ articulo?.fecha_publicacion | date:'mediumDate' }}</small>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <span *ngFor="let etiqueta of etiquetasArray" class="badge bg-secondary me-1">{{ etiqueta }}</span>
+            </div>
+        </div>
+    </div>
+</div>

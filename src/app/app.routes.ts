@@ -6,6 +6,7 @@ import { ConciertosVivoComponent } from './components/conciertos-vivo/conciertos
 import { OtrasProduccionesComponent } from './components/otras-producciones/otras-producciones.component';
 import { BlogNoticiasComponent } from './components/blog-noticias/blog-noticias.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { DetallesBlogComponent } from './components/detalles-blog/detalles-blog.component';
 
 export const routes: Routes = [
     {path: 'inicio', component: InicioComponent},
@@ -16,5 +17,6 @@ export const routes: Routes = [
     {path: 'otrasProducciones', component: OtrasProduccionesComponent},
     {path: 'blogNoticias', component: BlogNoticiasComponent},
     {path: 'contacto', component: ContactoComponent},
+    {path: 'blogNoticias/detalles/:id', component: DetallesBlogComponent},
     {path: '**', redirectTo: '/inicio' }
 ];

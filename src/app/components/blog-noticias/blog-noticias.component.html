@@ -14,7 +14,7 @@
                     <p>{{ articulo.contenido | truncate: 150 }}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                <button mat-button class="mx-auto">Ver más...</button>
+                <button mat-button class="mx-auto" routerLink="detalles/{{ articulo.id }}">Ver más...</button>
                 </mat-card-actions>
             </mat-card>
 
