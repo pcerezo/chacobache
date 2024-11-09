@@ -34,7 +34,11 @@ export class DetallesBlogComponent {
   };
   */
 
-  constructor(private route: ActivatedRoute, private blogNoticiasService: BlogNoticiasService) {
+  constructor(
+    private route: ActivatedRoute, 
+    private blogNoticiasService: BlogNoticiasService,
+    private router: Router
+  ) {
     this.route.paramMap.subscribe(params => {
       this.id = + (params.get('id') || 0);
     });
@@ -52,5 +56,9 @@ export class DetallesBlogComponent {
         this.etiquetasArray = this.articulo.tags.split(',');
       }
     });
+  }
+
+  volverBlogNoticias() {
+    this.router.navigate(['/blogNoticias']);
   }
 }

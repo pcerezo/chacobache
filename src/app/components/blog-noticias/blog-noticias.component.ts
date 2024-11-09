@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgControl, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,14 +14,17 @@ import { TruncatePipe } from '../../truncate.pipe';
 @Component({
   selector: 'app-blog-noticias',
   standalone: true,
-  imports: [MatCardModule, CommonModule, HttpClientModule, MatInputModule, MatButtonModule, MatFormFieldModule, ReactiveFormsModule,
+  imports: [MatCardModule, CommonModule, HttpClientModule, MatInputModule, MatButtonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule,
     RouterLink, TruncatePipe
   ],
+  providers: [],
   templateUrl: './blog-noticias.component.html',
   styleUrl: './blog-noticias.component.css'
 })
 export class BlogNoticiasComponent {
   articulos: ArticuloBlog[] = [];
+  articulosFiltrados: ArticuloBlog[] = [];
+  searchTerm: string = '';
 
   constructor(private blogNoticiasService: BlogNoticiasService) {
     this.getArticulos();
@@ -30,10 +33,23 @@ export class BlogNoticiasComponent {
   getArticulos() {
     this.blogNoticiasService.getArticulos().subscribe((respuesta) => {
       this.articulos = respuesta;
-      //console.log("Preguntas y respuestas: " +  this.faqs[0]);
+      this.articulosFiltrados = this.articulos;
     }, 
     (error) => {
       console.error("Error en la obtención de los artículos del blog: " + error);
     });
+  }
+
+  filterArticles(): void {
+    const term = this.searchTerm.toLowerCase();
+
+    this.articulosFiltrados = this.articulos.filter(articulo =>
+      articulo.titulo.toLowerCase().includes(term) ||
+      articulo.contenido.toLowerCase().includes(term) ||
+      articulo.tags.split(",").some((tag: string) => tag.toLowerCase().includes(term))
+    );
+
+    console.log("busqueda: " + term);
+    console.log("Artículos filtrados: " + this.articulosFiltrados.at(0)?.titulo);
   }
 }

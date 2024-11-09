@@ -44,3 +44,14 @@
 mat-card-content {
     min-height: 100px;
 }
+
+.article-title {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.error404 {
+    max-height: 50%;
+    max-width: 50%;
+    object-fit: contain !important;
+}

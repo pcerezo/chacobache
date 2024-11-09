@@ -4,7 +4,6 @@
 }
 
 .article-title {
-    font-size: 2.5em;
     font-weight: bold;
     color: #2c3e50;
 }
@@ -39,4 +38,12 @@
   
 .imagen-portada {
     object-fit: contain !important;
+}
+
+.back-button {
+    background-size: cover;
+}
+
+.fit-content {
+    width: fit-content;
 }
