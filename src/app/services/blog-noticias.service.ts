@@ -16,6 +16,10 @@ export class BlogNoticiasService {
     return this.http.get<any[]>(this.apiUrl + "articulos");
   }
 
+  getArticulosPagina(page: number) {
+    return this.http.get<any[]>(this.apiUrl + "articulosPagina/" + page);
+  }
+
   getArticuloById(id: number): Observable<ArticuloBlog> {
     return this.http.get<ArticuloBlog>(this.apiUrl + "detallesArticulo/" + id);
   }

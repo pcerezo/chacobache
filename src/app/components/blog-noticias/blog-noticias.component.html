@@ -20,7 +20,12 @@
                     </mat-card-header>
                     
                     <!--<img mat-card-image src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}"> -->
-                    <img mat-card-image class="imagen-portada" src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}">
+                    @if(articulo.url_imagen) {
+                        <img mat-card-image class="imagen-portada" src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}">
+                    }
+                    @else {
+                        <img mat-card-image class="imagen-portada" src="/assets/utils/chacobache_default.png" alt="{{ articulo.titulo }}">
+                    }
                     <mat-card-content>
                         <p>{{ articulo.contenido | truncate: 150 }}</p>
                     </mat-card-content>

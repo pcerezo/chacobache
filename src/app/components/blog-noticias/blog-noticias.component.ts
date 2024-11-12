@@ -25,13 +25,15 @@ export class BlogNoticiasComponent {
   articulos: ArticuloBlog[] = [];
   articulosFiltrados: ArticuloBlog[] = [];
   searchTerm: string = '';
+  page: number;
 
   constructor(private blogNoticiasService: BlogNoticiasService) {
+    this.page = 1;
     this.getArticulos();
   }
 
   getArticulos() {
-    this.blogNoticiasService.getArticulos().subscribe((respuesta) => {
+    this.blogNoticiasService.getArticulosPagina(this.page).subscribe((respuesta) => {
       this.articulos = respuesta;
       this.articulosFiltrados = this.articulos;
     }, 

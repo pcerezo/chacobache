@@ -8,7 +8,12 @@
     
     <!-- Imagen de portada -->
     <div class="cover-image mb-4">
-        <img [src]="articulo?.url_imagen" alt="{{ articulo?.titulo }}" class="img-fluid rounded imagen-portada mx-auto">
+        @if (articulo?.url_imagen) {
+            <img [src]="articulo?.url_imagen" alt="{{ articulo?.titulo }}" class="img-fluid rounded imagen-portada mx-auto">
+        }
+        @else {
+            <img src="/assets/utils/chacobache_default.png" alt="{{ articulo?.titulo }}" class="img-fluid rounded imagen-portada mx-auto">
+        }
     </div>
     
     <!-- Autor -->
