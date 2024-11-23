@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BACKEND } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactoService {
 
-  private apiUrl = "http://localhost:5000/api/contacto/";
+  private apiUrl = "http://" + BACKEND + ":5000/api/contacto/";
 
   constructor(private http: HttpClient) { }
 

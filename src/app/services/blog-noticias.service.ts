@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ArticuloBlog } from '../models/articuloBlog';
+import { BACKEND } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogNoticiasService {
 
-  private apiUrl = "http://localhost:5000/api/blog/";
+  private apiUrl = "http://" + BACKEND + ":5000/api/blog/";
 
   constructor(private http: HttpClient) { }
 

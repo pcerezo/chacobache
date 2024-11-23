@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BACKEND } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MultimediaService {
 
-  private apiUrl = "http://localhost:5000/api/eventos/";
+  private apiUrl = "http://" + BACKEND + ":5000/api/eventos/";
 
   constructor(private http: HttpClient) { }
 
