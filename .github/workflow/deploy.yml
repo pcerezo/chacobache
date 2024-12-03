@@ -3,7 +3,7 @@ name: CI/CD for Fullstack App
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   test:
@@ -60,7 +60,7 @@ jobs:
             then mv ./docs/browser/* ./docs/ 
           fi
           rm -rf ./docs/browser
-          
+
       # 4. Crear el archivo .nojekyll
       - name: Add .nojekyll file
         run: echo > docs/.nojekyll
