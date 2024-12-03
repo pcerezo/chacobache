@@ -10,5 +10,5 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(), provideHttpClient(withFetch())]
 };
 
-export const BACKEND: String = "https://localhost:5000";
-//export const BACKEND: String = "https://pcerezo.github.io/chacobache_api";
+//export const BACKEND: String = "https://localhost:5000";
+export const BACKEND: String = "https://pcerezo.github.io/chacobache_api";
