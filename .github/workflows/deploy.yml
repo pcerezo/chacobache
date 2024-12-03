@@ -22,8 +22,8 @@ jobs:
     
     - name: Build image and push
       run: |
-        docker compose -f docker-compose-dev.yml build
-        docker compose -f docker-compose-dev.yml push
+        docker build ./ -t ghcr.io/${{ github.repository }}/chacobache-frontend:latest
+        docker push ghcr.io/${{ github.repository }}/chacobache-frontend:latest
   
   deploy:
     needs: test
@@ -45,14 +45,15 @@ jobs:
       # 3. Ejecutar el build del frontend Angular
       - name: Build Angular App
         run: |
-          cd Chacobache
           npm install
           npm run build
 
       # 3. Despliega el contenedor
       - name: Deploy Docker container
         run: |
-          docker compose -f Chacobache_API/docker-compose-dev.yml up -d
+          docker stop chacobache-frontend || true
+          docker rm chacobache-frontend || true
+          docker run -d --name chacobache-frontend -p 4200:4200 ghcr.io/${{ github.repository }}/chacobache-frontend:latest
 
       - name: Move files to root
         run: |
