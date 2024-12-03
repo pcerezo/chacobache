@@ -7,7 +7,7 @@ import { BACKEND } from '../app.config';
   providedIn: 'root'
 })
 export class EventsService {
-  private apiUrl = "http://" + BACKEND + ":5000/api/eventos/";
+  private apiUrl = BACKEND + "/api/eventos/";
 
   constructor(private http: HttpClient) { }
 

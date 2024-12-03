@@ -1,6 +1,6 @@
 <div class="principal container article-container mt-5">
     <div class="row d-flex justify-content-center">
-        <button class="fit-content btn back-button" (click)="volverBlogNoticias()"><img src="/assets/utils/back_icon.png" height="20px" width="auto"></button>
+        <button class="fit-content btn back-button" (click)="volverBlogNoticias()"><img src="assets/utils/back_icon.png" height="20px" width="auto"></button>
         <h1 class="fit-content article-title text-center mx-auto">Blog y noticias</h1>
     </div>
     <!-- Título del artículo -->
@@ -12,7 +12,7 @@
             <img [src]="articulo?.url_imagen" alt="{{ articulo?.titulo }}" class="img-fluid rounded imagen-portada mx-auto">
         }
         @else {
-            <img src="/assets/utils/chacobache_default.png" alt="{{ articulo?.titulo }}" class="img-fluid rounded imagen-portada mx-auto">
+            <img src="assets/utils/chacobache_default.png" alt="{{ articulo?.titulo }}" class="img-fluid rounded imagen-portada mx-auto">
         }
     </div>
     

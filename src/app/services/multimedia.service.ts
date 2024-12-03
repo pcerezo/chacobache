@@ -8,7 +8,7 @@ import { BACKEND } from '../app.config';
 })
 export class MultimediaService {
 
-  private apiUrl = "http://" + BACKEND + ":5000/api/eventos/";
+  private apiUrl = BACKEND + "/api/eventos/";
 
   constructor(private http: HttpClient) { }
 

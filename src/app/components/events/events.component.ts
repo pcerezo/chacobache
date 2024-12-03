@@ -8,8 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
-import { FocusMonitor } from '@angular/cdk/a11y';
-import { error } from 'node:console';
 
 @Component({
   selector: 'app-events',

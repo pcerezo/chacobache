@@ -1,0 +1,11 @@
+{
+  "routes": [
+    "/blogNoticias",
+    "/conciertosEnVivo",
+    "/contacto",
+    "/eventos",
+    "/inicio",
+    "/integrantes",
+    "/otrasProducciones"
+  ]
+}

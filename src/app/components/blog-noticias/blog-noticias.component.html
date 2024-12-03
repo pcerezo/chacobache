@@ -7,7 +7,7 @@
             <mat-label>Buscar en el blog</mat-label>
             <input matInput [(ngModel)]="searchTerm" placeholder="Buscar por título, contenido o etiquetas">
         </mat-form-field>
-        <button class="fit-content btn btn-outline-secondary search-button" (click)="filterArticles()"><img src="/assets/utils/search_icon.png" height="20px" width="auto"></button>
+        <button class="fit-content btn btn-outline-secondary search-button" (click)="filterArticles()"><img src="assets/utils/search_icon.png" height="20px" width="auto"></button>
     </div>
     
     <div class="row">
@@ -24,7 +24,7 @@
                         <img mat-card-image class="imagen-portada" src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}">
                     }
                     @else {
-                        <img mat-card-image class="imagen-portada" src="/assets/utils/chacobache_default.png" alt="{{ articulo.titulo }}">
+                        <img mat-card-image class="imagen-portada" src="assets/utils/chacobache_default.png" alt="{{ articulo.titulo }}">
                     }
                     <mat-card-content>
                         <p>{{ articulo.contenido | truncate: 150 }}</p>
@@ -36,7 +36,7 @@
             </div>
         }
         @else {
-            <img src="/assets/utils/error404.png" class="error404 mx-auto">
+            <img src="assets/utils/error404.png" class="error404 mx-auto">
         }
     </div>
   </div>
