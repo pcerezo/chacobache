@@ -11,4 +11,4 @@ export const appConfig: ApplicationConfig = {
 };
 
 //export const BACKEND: String = "https://localhost:5000";
-export const BACKEND: String = "https://pcerezo.github.io/chacobache_api";
+export const BACKEND: String = "https://chacobacheapi-fa726beb69c2.herokuapp.com";
