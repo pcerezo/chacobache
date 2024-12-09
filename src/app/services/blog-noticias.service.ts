@@ -13,12 +13,22 @@ export class BlogNoticiasService {
 
   constructor(private http: HttpClient) { }
 
-  getArticulos(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + "articulos");
+  getNumArticulos(filtro: string): Observable<number> {
+    if (filtro.length > 0) {
+      return this.http.get<number>(this.apiUrl + "articulos?filtro=" + filtro);
+    }
+    else {
+      return this.http.get<number>(this.apiUrl + "articulos");
+    }
   }
 
-  getArticulosPagina(page: number) {
-    return this.http.get<any[]>(this.apiUrl + "articulosPagina/" + page);
+  getArticulosPagina(page: number, filtro: string) {
+    if (filtro.length > 0) {
+      return this.http.get<any>(this.apiUrl + "articulosPagina/" + page + "?filtro=" + filtro);
+    }
+    else {
+      return this.http.get<any>(this.apiUrl + "articulosPagina/" + page);
+    }
   }
 
   getArticuloById(id: number): Observable<ArticuloBlog> {

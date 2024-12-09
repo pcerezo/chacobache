@@ -55,3 +55,7 @@ mat-card-content {
     max-width: 50%;
     object-fit: contain !important;
 }
+
+#paginador {
+    width: fit-content;
+}

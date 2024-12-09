@@ -26,15 +26,25 @@ export class BlogNoticiasComponent {
   articulosFiltrados: ArticuloBlog[] = [];
   searchTerm: string = '';
   page: number;
+  total!: number;
+  offset: number;
+  limit: number;
 
   constructor(private blogNoticiasService: BlogNoticiasService) {
     this.page = 1;
+    this.offset = 0;
+    this.limit = 2;
     this.getArticulos();
   }
 
+  private calcularOffset() {
+    this.offset = (this.page - 1) * this.limit;
+  }
+
   getArticulos() {
-    this.blogNoticiasService.getArticulosPagina(this.page).subscribe((respuesta) => {
-      this.articulos = respuesta;
+    this.blogNoticiasService.getArticulosPagina(this.page, this.searchTerm).subscribe((respuesta) => {
+      this.total = respuesta.total;
+      this.articulos = respuesta.articulos;
       this.articulosFiltrados = this.articulos;
     }, 
     (error) => {
@@ -42,6 +52,35 @@ export class BlogNoticiasComponent {
     });
   }
 
+  avanzarPagina() {
+    this.page = this.page + 1;
+    this.calcularOffset();
+
+    this.getArticulos();
+
+    if (this.articulosFiltrados.length == 0) {
+      this.page = this.page - 1;
+    }
+  }
+
+  retrocederPagina() {
+    this.page = this.page - 1;
+    this.calcularOffset();
+
+    if (this.page < 1) {
+      this.page = 1;
+    }
+
+    this.getArticulos();
+  }
+
+  filterArticles(): void {
+    this.page = 1;
+    this.offset = 0;
+    this.getArticulos();
+  }
+
+  /*
   filterArticles(): void {
     const term = this.searchTerm.toLowerCase();
 
@@ -54,4 +93,5 @@ export class BlogNoticiasComponent {
     console.log("busqueda: " + term);
     console.log("Artículos filtrados: " + this.articulosFiltrados.at(0)?.titulo);
   }
+  */
 }
