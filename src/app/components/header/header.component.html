@@ -8,7 +8,7 @@
     </div>
     <div class="d-flex align-items-center">
         <button class="btn btn-secondary me-2">Compartir</button>
-        <img src="assets/qrcode.png" class="qr-code">
+        <!--<img src="assets/qrcode.png" class="qr-code"> -->
     </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -33,6 +33,11 @@
 
             <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/contacto']">Contacto, soporte, FAQ...</a>
 
+        </div>
+        <div class="navbar-nav">
+            @if(token != null && token != '') {
+            <button class="nav-link" (click)="logout()">Cerrar sesión</button>
+            }
         </div>
     </div>
 </nav>
