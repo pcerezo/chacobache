@@ -7,6 +7,9 @@ import { OtrasProduccionesComponent } from './components/otras-producciones/otra
 import { BlogNoticiasComponent } from './components/blog-noticias/blog-noticias.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { DetallesBlogComponent } from './components/detalles-blog/detalles-blog.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './authGuard';
+import { AdminMainComponent } from './components/admin-main/admin-main.component';
 
 export const routes: Routes = [
     {path: 'inicio', component: InicioComponent},
@@ -18,5 +21,8 @@ export const routes: Routes = [
     {path: 'blogNoticias', component: BlogNoticiasComponent},
     {path: 'contacto', component: ContactoComponent},
     {path: 'blogNoticias/detalles/:id', component: DetallesBlogComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'admin', component: AdminMainComponent, canActivate: [AuthGuard]},
+
     {path: '**', redirectTo: '/inicio' }
 ];
