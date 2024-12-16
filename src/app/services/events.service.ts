@@ -19,6 +19,10 @@ export class EventsService {
     return this.http.get<any[]>(this.apiUrl + "historialEventosPasados");
   }
 
+  getAllEventos(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + "historialEventos");
+  }
+
   getEventosPasadosConMultimedia(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + "historialEventosPasadosMultimedia")
   }

@@ -21,6 +21,7 @@
     width: 300px;
     transition: transform 0.3s ease;
     cursor: pointer;
+    height: auto;
 }
   
 .event-card:hover {
@@ -104,3 +105,58 @@ button {
     opacity: 1; /* Visible cuando se aplica la clase .show */
 }
   
+.header-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: 15%;
+}
+
+.btn-create, .btn-edit,
+.btn-delete {
+  border-radius: 8px; /* Esquinas ligeramente redondeadas */
+  font-size: 14px;
+  font-weight: bold;
+  border: 2px ridge transparent; /* Borde inicial transparente */
+  transition: all 0.3s ease; /* Transición suave para los efectos */
+}
+
+.btn-create {
+  background-color: #28a74600; /* Color de fondo verde */
+  color: rgb(0, 0, 0);
+  border-color: #000501; /* Borde visible */
+}
+
+.btn-create:hover {
+  background-color: #21883771; /* Verde más oscuro al pasar el ratón */
+  border-color: #000000; /* Borde más oscuro */
+}
+
+.btn-edit {
+    background-color: #a79a2800; /* Color de fondo verde */
+    color: rgb(0, 0, 0);
+    border-color: #000501; /* Borde visible */
+}
+  
+.btn-edit:hover {
+    background-color: #fcff5271; /* Verde más oscuro al pasar el ratón */
+    border-color: #000000; /* Borde más oscuro */
+}
+
+.btn-delete {
+  background-color: #dc354600; /* Color de fondo rojo */
+  color: rgb(0, 0, 0);
+  border-color: #000000; /* Borde visible */
+}
+
+.btn-delete:hover {
+  background-color: #c823336b; /* Rojo más oscuro al pasar el ratón */
+  border-color: #000000; /* Borde más oscuro */
+}
+
+.event-actions {
+    margin-top: auto;
+    margin-bottom: 2px;
+}

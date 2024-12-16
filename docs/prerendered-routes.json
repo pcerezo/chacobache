@@ -1,6 +1,8 @@
 {
   "routes": [
     "/admin",
+    "/admin/eventos",
+    "/admin/eventos/crearEvento",
     "/blogNoticias",
     "/conciertosEnVivo",
     "/contacto",
