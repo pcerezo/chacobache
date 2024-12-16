@@ -60,7 +60,14 @@ footer {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+/*
 app-blog-noticias, app-integrantes, app-events, app-conciertos-vivo, app-otras-producciones, app-contacto, .principal {
+    min-height: 80vh;   // Ocupa mínimo la altura del viewport 
+    display: flex;
+    flex-direction: column;
+}*/
+
+.principal {
     min-height: 80vh;   /* Ocupa mínimo la altura del viewport */
     display: flex;
     flex-direction: column;

@@ -9,7 +9,11 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { DetallesBlogComponent } from './components/detalles-blog/detalles-blog.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './authGuard';
-import { AdminMainComponent } from './components/admin-main/admin-main.component';
+import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
+import { ListaEventosComponent } from './components/admin/eventos/lista-eventos/lista-eventos.component';
+import { CrearEventoComponent } from './components/admin/eventos/crear-evento/crear-evento.component';
+import { EditarEventoComponent } from './components/admin/eventos/editar-evento/editar-evento.component';
+import { BorrarEventoComponent } from './components/admin/eventos/borrar-evento/borrar-evento.component';
 
 export const routes: Routes = [
     {path: 'inicio', component: InicioComponent},
@@ -23,6 +27,10 @@ export const routes: Routes = [
     {path: 'blogNoticias/detalles/:id', component: DetallesBlogComponent},
     {path: 'login', component: LoginComponent},
     {path: 'admin', component: AdminMainComponent, canActivate: [AuthGuard]},
-
+    {path: 'admin/eventos', component: ListaEventosComponent, canActivate: [AuthGuard]},
+    {path: 'admin/eventos/crearEvento', component: CrearEventoComponent, canActivate: [AuthGuard]},
+    {path: 'admin/eventos/editarEvento/:id', component: EditarEventoComponent, canActivate: [AuthGuard]},
+    {path: 'admin/eventos/eliminarEvento/:id', component: BorrarEventoComponent, canActivate: [AuthGuard]},
+    
     {path: '**', redirectTo: '/inicio' }
 ];

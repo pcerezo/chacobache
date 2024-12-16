@@ -3,19 +3,19 @@
     <h2>Selecciona una entidad:</h2>
     <div class="menu-buttons">
       <!-- Botón Eventos -->
-      <button mat-raised-button class="menu-button" (click)="navigateTo('eventos')">
+      <button mat-raised-button class="menu-button" [routerLink]="['/admin/eventos']">
         Eventos
       </button>
       <!-- Botón Artículo del Blog -->
-      <button mat-raised-button class="menu-button" (click)="navigateTo('blog')">
+      <button mat-raised-button class="menu-button" [routerLink]="['/admin/articulos']">
         Artículo del Blog
       </button>
       <!-- Botón Multimedia -->
-      <button mat-raised-button class="menu-button" (click)="navigateTo('multimedia')">
+      <button mat-raised-button class="menu-button" [routerLink]="['/admin/multimedia']">
         Multimedia
       </button>
       <!-- Botón Preguntas y Respuestas -->
-      <button mat-raised-button class="menu-button" (click)="navigateTo('faq')">
+      <button mat-raised-button class="menu-button" [routerLink]="['/admin/faq']">
         Preguntas y Respuestas
       </button>
     </div>
