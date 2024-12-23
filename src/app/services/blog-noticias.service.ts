@@ -34,4 +34,8 @@ export class BlogNoticiasService {
   getArticuloById(id: number): Observable<ArticuloBlog> {
     return this.http.get<ArticuloBlog>(this.apiUrl + "detallesArticulo/" + id);
   }
+
+  eliminarArticulo(id: number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + "eliminarArticulo/" + id);
+  }
 }

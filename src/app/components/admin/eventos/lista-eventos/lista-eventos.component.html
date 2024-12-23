@@ -19,7 +19,7 @@
                 </mat-card-content>
                 <mat-card-actions class="event-actions">
                     <button class="btn btn-edit"   [routerLink]="['/admin/eventos/editarEvento/' + evento.id]">* Editar evento</button>
-                    <button class="btn btn-delete" [routerLink]="['/admin/eventos/eliminarEvento/' + evento.id]">x Elimina evento</button>
+                    <button class="btn btn-delete" (click)="openDialog(evento.id, evento.lugar)">x Elimina evento</button>
                 </mat-card-actions>
             </mat-card>
             }

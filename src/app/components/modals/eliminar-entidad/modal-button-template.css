@@ -1,0 +1,18 @@
+.mat-dialog-container {
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button[mat-dialog-close] {
+    margin-right: 8px;
+}
+  
+@use '@angular/material' as mat;
+
+mat-dialog-container {
+  @include mat.dialog-overrides((
+    container-color: orange,
+    subhead-color: red,
+  ));
+}

@@ -15,4 +15,8 @@ export class MultimediaService {
   /*getMultimediaByEventoId(id_evento: number): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + "");
   }*/
+
+  eliminarMultimedia(id: number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + "eliminarMultimedia/" + id);
+  }
 }

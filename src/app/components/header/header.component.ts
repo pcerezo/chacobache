@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, DoCheck, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -10,12 +10,16 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements DoCheck{
   token: string | null = null;
 
   private subscription!: Subscription;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
+  }
+  
+  ngDoCheck(): void {
+    this.token = localStorage.getItem('token');
   }
 
   ngOnInit() {
