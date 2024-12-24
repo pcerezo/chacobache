@@ -41,7 +41,10 @@ export class ModalButtonTemplateComponent {
           console.log("Después de eliminar evento");
           break;
         case 2:
-          this.blogNoticiasService.eliminarArticulo(this.data.idEntidad);
+          this.blogNoticiasService.eliminarArticulo(this.data.idEntidad).subscribe((res) => {
+            this.eventUpdateService.notifyEventUpdated();
+            console.log("Resultado: " + res.message);
+          });
           console.log("Eliminar artículo");
           break;
         case 3:

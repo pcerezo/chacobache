@@ -1,0 +1,71 @@
+<div class="form-container">
+  <div class="row justify-content-start align-items-start">
+    <button mat-raised-button class="button-back col-1" (click)="volver()">Atrás</button>
+    <form [formGroup]="articuloForm" (ngSubmit)="onSubmit()" class="articulo-form">
+      <mat-card>
+        <mat-card-title class="form-title">{{ page_title }}</mat-card-title>
+        <mat-card-content>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Título</mat-label>
+              <input matInput formControlName="titulo" required>
+              @if(articuloForm.get('titulo')?.hasError('required')) {
+                <mat-error>El título es obligatorio</mat-error>
+              }
+            </mat-form-field>
+          </div>
+    
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Contenido</mat-label>
+              <textarea matInput rows="5" formControlName="contenido" required></textarea>
+              @if(articuloForm.get('contenido')?.hasError('required')) {
+                <mat-error>El contenido es obligatorio</mat-error>
+              }
+            </mat-form-field>
+          </div>
+    
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Autor</mat-label>
+              <input matInput formControlName="autor" required>
+              @if(articuloForm.get('autor')?.hasError('required')) {
+                <mat-error>El autor es obligatorio</mat-error>
+              }
+            </mat-form-field>
+          </div>
+    
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Fecha de publicación</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="fecha_publicacion" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              @if(articuloForm.get('fecha_publicacion')?.hasError('required')) {
+                <mat-error>La fecha de publicación es obligatoria</mat-error>
+              }
+            </mat-form-field>
+          </div>
+    
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Tags (separados por comas, sin espacios)</mat-label>
+              <input matInput formControlName="tags">
+            </mat-form-field>
+          </div>
+    
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>URL de la imagen</mat-label>
+              <input matInput formControlName="url_imagen">
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="button-group">
+          <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="articuloForm.invalid">Guardar</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+</div>

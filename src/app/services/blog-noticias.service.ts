@@ -35,7 +35,15 @@ export class BlogNoticiasService {
     return this.http.get<ArticuloBlog>(this.apiUrl + "detallesArticulo/" + id);
   }
 
+  crearArticulo(articulo: ArticuloBlog): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "articulos/create", articulo);
+  }
+
+  actualizarArticulo(id: number, articulo: ArticuloBlog): Observable<any> {
+    return this.http.put<any>(this.apiUrl + "articulos/actualizarArticulo/" + id, articulo);
+  }
+
   eliminarArticulo(id: number): Observable<any> {
-    return this.http.delete<any>(this.apiUrl + "eliminarArticulo/" + id);
+    return this.http.delete<any>(this.apiUrl + "articulos/eliminarArticulo/" + id);
   }
 }

@@ -33,7 +33,7 @@ export class BlogNoticiasComponent {
   constructor(private blogNoticiasService: BlogNoticiasService) {
     this.page = 1;
     this.offset = 0;
-    this.limit = 2;
+    this.limit = 5;
     this.getArticulos();
   }
 

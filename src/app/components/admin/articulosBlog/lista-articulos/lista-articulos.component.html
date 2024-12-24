@@ -1,0 +1,76 @@
+<!-- filepath: /c:/Users/pcere/OneDrive/Documentos/proyectos/Chacobache/src/app/components/admin/articulos/lista-articulos/lista-articulos.component.html -->
+<div class="container blog-container mt-5">
+  <h1 class="text-center mb-4 article-title mx-auto">Lista de artículos</h1>
+
+  <div class="row justify-content-start">
+    <!-- Campo de búsqueda -->
+    <div class="search-bar col-4">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Buscar en el blog</mat-label>
+        <input matInput [(ngModel)]="searchTerm" placeholder="Buscar por título, contenido o etiquetas">
+      </mat-form-field>
+      <button class="fit-content btn btn-outline-secondary search-button" (click)="filterArticles()"><img src="assets/utils/search_icon.png" height="20px" width="auto"></button>
+    </div>
+
+    <div class="header-buttons col-4">
+      <button class="btn btn-create" routerLink="/admin/articulos/crearArticulo">+ Crear artículo</button>
+    </div>
+  </div>
+  
+  <div class="row">
+    @if (articulosFiltrados.length > 0) {
+      <div class="col-md-4 mb-4" *ngFor="let articulo of articulosFiltrados">
+        <mat-card class="example-card" appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>{{ articulo.titulo }}</mat-card-title><br>
+            <mat-card-subtitle><small class="text-muted">{{ articulo.fecha_publicacion | date}}</small></mat-card-subtitle>
+          </mat-card-header>
+          
+          @if(articulo.url_imagen) {
+            <img mat-card-image class="imagen-portada" src="{{ articulo.url_imagen }}" alt="{{ articulo.titulo }}">
+          }
+          @else {
+            <img mat-card-image class="imagen-portada" src="assets/utils/chacobache_default.png" alt="{{ articulo.titulo }}">
+          }
+          <mat-card-content>
+            <p>{{ articulo.contenido | truncate: 150 }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button class="mx-auto" [routerLink]="['/admin/articulos/editarArticulo/' + articulo.id]">* Editar artículo</button>
+            <button mat-button class="mx-auto" (click)="openDialog(articulo.id, articulo.titulo)">x Eliminar artículo</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    }
+    @else {
+      <img src="assets/utils/error404.png" class="error404 mx-auto">
+    }
+  </div>
+
+  <div id="paginador" class="pagination-container mx-auto">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        @if (offset - limit >= 0) {
+        <li class="page-item">
+          <a class="page-link" (click)="retrocederPagina()">Anterior</a>
+        </li>
+        }
+        @else {
+        <li class="page-item disabled">
+          <a class="page-link" (click)="retrocederPagina()">Anterior</a>
+        </li>
+        }
+        @if (offset + limit < total) {
+        <li class="page-item">
+          <a class="page-link" (click)="avanzarPagina()">Siguiente</a>
+        </li>
+        }
+        @else {
+        <li class="page-item disabled">
+          <a class="page-link" (click)="avanzarPagina()">Siguiente</a>
+        </li>
+        }
+      </ul>
+    </nav>
+  </div>
+</div>

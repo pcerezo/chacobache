@@ -17,25 +17,31 @@ export class HeaderComponent implements DoCheck{
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
   }
-  
+
   ngDoCheck(): void {
-    this.token = localStorage.getItem('token');
+    if (typeof localStorage !== 'undefined') {
+      this.token = localStorage.getItem('token');
+    }
   }
 
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.token = localStorage.getItem('token');
-    }
-    else {
-      this.token = null;
+    if (typeof localStorage !== 'undefined') {
+      if (isPlatformBrowser(this.platformId)) {
+        this.token = localStorage.getItem('token');
+      }
+      else {
+        this.token = null;
+      }
     }
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.token = null;
-    console.log("Item: " + localStorage.getItem('token'));
-    this.router.navigate(['/login']);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('token');
+      this.token = null;
+      console.log("Item: " + localStorage.getItem('token'));
+      this.router.navigate(['/login']);
+    }
   }
 
 }
