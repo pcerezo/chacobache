@@ -19,4 +19,8 @@ export class ContactoService {
   enviarPregunta(formulario: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + "enviarPregunta", formulario);
   }
+
+  eliminarPreguntaYRespuesta(id: number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + "eliminarPreguntaYRespuesta/" + id);
+  }
 }

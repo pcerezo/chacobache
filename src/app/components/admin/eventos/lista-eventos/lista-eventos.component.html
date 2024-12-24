@@ -3,7 +3,6 @@
         <h1 class="event-title">Lista de eventos</h1>
         <div class="header-buttons">
             <button class="btn btn-create" routerLink="/admin/eventos/crearEvento">+ Crear evento</button>
-            <!-- button class="btn btn-delete">x Eliminar eventos</button> -->
         </div>
         @if(listaEventos.length > 0) {
         <div class="event-list">
@@ -19,7 +18,7 @@
                 </mat-card-content>
                 <mat-card-actions class="event-actions">
                     <button class="btn btn-edit"   [routerLink]="['/admin/eventos/editarEvento/' + evento.id]">* Editar evento</button>
-                    <button class="btn btn-delete" [routerLink]="['/admin/eventos/eliminarEvento/' + evento.id]">x Elimina evento</button>
+                    <button class="btn btn-delete" (click)="openDialog(evento.id, evento.lugar)">x Elimina evento</button>
                 </mat-card-actions>
             </mat-card>
             }

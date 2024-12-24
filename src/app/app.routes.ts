@@ -14,6 +14,10 @@ import { ListaEventosComponent } from './components/admin/eventos/lista-eventos/
 import { CrearEventoComponent } from './components/admin/eventos/crear-evento/crear-evento.component';
 import { EditarEventoComponent } from './components/admin/eventos/editar-evento/editar-evento.component';
 import { BorrarEventoComponent } from './components/admin/eventos/borrar-evento/borrar-evento.component';
+import { ListaArticulosComponent } from './components/admin/articulosBlog/lista-articulos/lista-articulos.component';
+import { CrearArticuloComponent } from './components/admin/articulosBlog/crear-articulo/crear-articulo.component';
+import { EditarArticuloComponent } from './components/admin/articulosBlog/editar-articulo/editar-articulo.component';
+import { Error404Component } from './components/error404/error404.component';
 
 export const routes: Routes = [
     {path: 'inicio', component: InicioComponent},
@@ -26,11 +30,16 @@ export const routes: Routes = [
     {path: 'contacto', component: ContactoComponent},
     {path: 'blogNoticias/detalles/:id', component: DetallesBlogComponent},
     {path: 'login', component: LoginComponent},
+
     {path: 'admin', component: AdminMainComponent, canActivate: [AuthGuard]},
     {path: 'admin/eventos', component: ListaEventosComponent, canActivate: [AuthGuard]},
     {path: 'admin/eventos/crearEvento', component: CrearEventoComponent, canActivate: [AuthGuard]},
     {path: 'admin/eventos/editarEvento/:id', component: EditarEventoComponent, canActivate: [AuthGuard]},
     {path: 'admin/eventos/eliminarEvento/:id', component: BorrarEventoComponent, canActivate: [AuthGuard]},
+    {path: 'admin/articulos', component: ListaArticulosComponent, canActivate: [AuthGuard]},
+    {path: 'admin/articulos/crearArticulo', component: CrearArticuloComponent, canActivate: [AuthGuard]},
+    {path: 'admin/articulos/editarArticulo/:id', component: EditarArticuloComponent, canActivate: [AuthGuard]},
+    //{path: 'admin/articulos/eliminarArticulo/:id', component: BorrarArticuloComponent, canActivate: [AuthGuard]},
     
-    {path: '**', redirectTo: '/inicio' }
+    {path: '**', component: Error404Component }
 ];

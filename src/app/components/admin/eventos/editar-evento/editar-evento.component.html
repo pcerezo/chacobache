@@ -1,12 +1,12 @@
 
     <form [formGroup]="eventoForm" (ngSubmit)="onSubmit()" class="evento-form">
         <mat-card>
-            <mat-card-title class="form-title">Crear/Editar Evento</mat-card-title>
+            <mat-card-title class="form-title">{{ page_title }}</mat-card-title>
             <mat-card-content>
                 <div class="form-field">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Lugar</mat-label>
-                        <input matInput formControlName="lugar" required>
+                        <input matInput formControlName="lugar" value="{{ evento.lugar }}" required>
                         @if(eventoForm.get('lugar')?.hasError('required')) {
                             <mat-error>El lugar es obligatorio</mat-error>
                         }
@@ -16,7 +16,7 @@
                 <div class="form-field">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Fecha</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="fecha" required>
+                        <input matInput [matDatepicker]="picker" formControlName="fecha" value="{{ evento.fecha }}" required>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                         @if(eventoForm.get('fecha')?.hasError('required')) {
@@ -28,7 +28,7 @@
                 <div class="form-field">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Descripción</mat-label>
-                        <textarea matInput rows="3" formControlName="descripcion" required></textarea>
+                        <textarea matInput rows="3" formControlName="descripcion" value="{{ evento.descripcion }}" required></textarea>
                         @if(eventoForm.get('descripcion')?.hasError('required')) {
                             <mat-error>La descripción es obligatoria</mat-error>
                         }
@@ -38,25 +38,25 @@
                 <div class="form-field">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Enlace al PDF</mat-label>
-                        <input matInput formControlName="enlace_pdf">
+                        <input matInput formControlName="enlace_pdf" value="{{ evento.enlace_pdf }}">
                     </mat-form-field>
                 </div>
         
                 <div class="form-field">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Enlace a entradas</mat-label>
-                        <input matInput formControlName="enlace_entradas">
+                        <input matInput formControlName="enlace_entradas" value="{{ evento.enlace_entradas }}">
                     </mat-form-field>
                 </div>
         
                 <div class="form-field">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Tipo</mat-label>
-                        <mat-select formControlName="tipo" required>
+                        <mat-select formControlName="tipo" value="{{ evento.tipo }}" required>
                             <mat-option selected>-- Selecciona un tipo --</mat-option>
                             <mat-option value="charla">Charla</mat-option>
                             <mat-option value="concierto">Concierto</mat-option>
-                            <mat-option value="otro">Otro</mat-option>
+                            <mat-option value="individual">Individual</mat-option>
                         </mat-select>
                         @if (eventoForm.get('tipo')?.hasError('required')) {
                             <mat-error>El tipo es obligatorio</mat-error>

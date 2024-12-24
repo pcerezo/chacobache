@@ -1,0 +1,121 @@
+.blog-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.event-card {
+    transition: box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.event-descripcion {
+    color: #555;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.imagen-portada {
+    height: 380px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+  
+
+.example-card {
+    max-width: 400px;
+    height: auto;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+mat-card-content {
+    min-height: 100px;
+}
+
+.article-title {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.error404 {
+    max-height: 50%;
+    max-width: 50%;
+    object-fit: contain !important;
+}
+
+#paginador {
+    width: fit-content;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-button {
+    margin-left: 10px;
+}
+
+.header-buttons {
+    display: block;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: 15%;
+}
+
+.btn-create, .btn-edit,
+.btn-delete {
+  border-radius: 8px; /* Esquinas ligeramente redondeadas */
+  font-size: 14px;
+  font-weight: bold;
+  border: 2px ridge transparent; /* Borde inicial transparente */
+  transition: all 0.3s ease; /* Transición suave para los efectos */
+}
+
+.btn-create {
+  background-color: #28a74600; /* Color de fondo verde */
+  color: rgb(0, 0, 0);
+  border-color: #000501; /* Borde visible */
+}
+
+.btn-create:hover {
+  background-color: #21883771; /* Verde más oscuro al pasar el ratón */
+  border-color: #000000; /* Borde más oscuro */
+}
+
+.btn-edit {
+    background-color: #a79a2800; /* Color de fondo verde */
+    color: rgb(0, 0, 0);
+    border-color: #000501; /* Borde visible */
+}
+  
+.btn-edit:hover {
+    background-color: #fcff5271; /* Verde más oscuro al pasar el ratón */
+    border-color: #000000; /* Borde más oscuro */
+}
+
+.btn-delete {
+  background-color: #dc354600; /* Color de fondo rojo */
+  color: rgb(0, 0, 0);
+  border-color: #000000; /* Borde visible */
+}
+
+.btn-delete:hover {
+  background-color: #c823336b; /* Rojo más oscuro al pasar el ratón */
+  border-color: #000000; /* Borde más oscuro */
+}
