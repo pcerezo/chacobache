@@ -1,0 +1,53 @@
+<div class="container principal multimedia-evento mt-5">
+  <!-- Título del evento -->
+  <h2 class="text-center">{{evento.lugar}} - {{evento.fecha | date}}</h2>
+  
+  <div class="header-buttons">
+    <button class="btn btn-create" routerLink="/admin/multimedia/crearMultimedia">+ Añadir multimedia</button>
+  </div>
+  <!-- Imagen principal seleccionada -->
+  @if (listaMultimedia.length > 0) {
+    @if(tipoSelectedImage == 'imagen') { 
+      <div id="selected-image-container" class="d-flex justify-content-center mt-4">
+        <img #selectedImageElement id="selected-image" class="img-fluid fade-in" alt="Imagen seleccionada">
+      </div>
+    }
+    @if(tipoSelectedImage == 'video') {
+      <p id="selected-image-container" class="d-flex justify-content-center mt-4">
+        <iframe #selectedImageElement width="560" height="315" frameborder="0" 
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </p>
+    }
+  }
+  @else {
+    <div class="event-list">
+        <mat-card class="event-card">
+          <mat-card-header>
+            <mat-card-title>Aún no se han subido</mat-card-title>
+            <!-- <mat-card-subtitle>{{ evento.fecha | date }}</mat-card-subtitle> -->
+          </mat-card-header>
+          <mat-card-content>
+            <p>Pronto desvelaremos recuerdos de nuestros eventos</p>
+          </mat-card-content>
+        </mat-card>
+    </div>
+  }
+
+  <!-- Carousel de miniaturas -->
+  <div id="carouselThumbnails" class="carousel slide mt-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="row">
+          @for (thumbnail of thumbnails; track $index) {
+            <div class="col-md-3">
+              <img [src]="thumbnail.enlace" class="d-block w-100 img-thumbnail clickable"
+                  [attr.data-full-image]="thumbnail.enlace"
+                  (click)="onThumbnailClick(thumbnail)"
+                  [alt]="thumbnail.descripcion">
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

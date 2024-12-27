@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { EventUpdateService } from '../../services/event-update.service';
 
 @Component({
   selector: 'app-events',
@@ -25,24 +26,38 @@ export class EventsComponent {
   envioErroneo: Boolean | undefined;
   enviado: Boolean | undefined;
 
-  constructor(private eventsService: EventsService, private fb: FormBuilder) {
-    eventsService.getEventosFuturos().subscribe((eventos) => {
-      this.eventosFuturos = eventos;
-    });
-
-    eventsService.getEventosPasados().subscribe((eventos) => {
-      this.eventosPasados = eventos;
-    });
-
+  constructor(
+    private eventsService: EventsService,
+    private fb: FormBuilder,
+    private eventUpdateService: EventUpdateService
+  ) {
     this.contactForm = this.fb.group({
-      nombre : new FormControl('', [Validators.required]),
-      email : new FormControl('', [Validators.required, Validators.email]),
-      mensaje : new FormControl ('', [Validators.required])
+      nombre: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      mensaje: new FormControl('', [Validators.required])
     });
 
     this.envioExistoso = undefined;
     this.envioErroneo = undefined;
     this.enviado = false;
+  }
+
+  ngOnInit(): void {
+    this.loadEventos();
+
+    this.eventUpdateService.eventUpdated$.subscribe(() => {
+      this.loadEventos();
+    });
+  }
+
+  loadEventos(): void {
+    this.eventsService.getEventosFuturos().subscribe((eventos) => {
+      this.eventosFuturos = eventos;
+    });
+
+    this.eventsService.getEventosPasados().subscribe((eventos) => {
+      this.eventosPasados = eventos;
+    });
   }
 
   get nombre() {

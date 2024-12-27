@@ -1,0 +1,90 @@
+.header-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.multimedia-evento {
+    margin: auto;
+    margin-top: 3%;
+}
+
+.event-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.event-card {
+    width: 300px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    height: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.btn-create {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-create:hover {
+    background-color: #45a049;
+}
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+#selected-image-container img {
+    max-height: 400px;
+    width: auto;
+}
+
+#selected-image-container iframe {
+    max-width: 100%;
+}
+
+.carousel-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-thumbnail {
+    max-height: 150px;
+    object-fit: cover;
+}

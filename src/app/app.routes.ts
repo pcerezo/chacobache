@@ -18,6 +18,8 @@ import { ListaArticulosComponent } from './components/admin/articulosBlog/lista-
 import { CrearArticuloComponent } from './components/admin/articulosBlog/crear-articulo/crear-articulo.component';
 import { EditarArticuloComponent } from './components/admin/articulosBlog/editar-articulo/editar-articulo.component';
 import { Error404Component } from './components/error404/error404.component';
+import { EditarMultimediaComponent } from './components/admin/multimedia/editar-multimedia/editar-multimedia.component';
+import { ListaMultimediaComponent } from './components/admin/multimedia/lista-multimedia/lista-multimedia.component';
 
 export const routes: Routes = [
     {path: 'inicio', component: InicioComponent},
@@ -39,6 +41,8 @@ export const routes: Routes = [
     {path: 'admin/articulos', component: ListaArticulosComponent, canActivate: [AuthGuard]},
     {path: 'admin/articulos/crearArticulo', component: CrearArticuloComponent, canActivate: [AuthGuard]},
     {path: 'admin/articulos/editarArticulo/:id', component: EditarArticuloComponent, canActivate: [AuthGuard]},
+    {path: 'admin/multimedia/editarMultimedia/:id', component: EditarMultimediaComponent, canActivate: [AuthGuard]},
+    {path: 'admin/multimedia', component: ListaMultimediaComponent, canActivate: [AuthGuard]},
     //{path: 'admin/articulos/eliminarArticulo/:id', component: BorrarArticuloComponent, canActivate: [AuthGuard]},
     
     {path: '**', component: Error404Component }

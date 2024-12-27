@@ -8,15 +8,27 @@ import { BACKEND } from '../app.config';
 })
 export class MultimediaService {
 
-  private apiUrl = BACKEND + "/api/eventos/";
+  private apiUrl = BACKEND + "/api/multimedia/";
 
   constructor(private http: HttpClient) { }
 
-  /*getMultimediaByEventoId(id_evento: number): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + "");
-  }*/
+  getMultimediaByEventoId(id_evento: number): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + "getMultimediaByEvento/" + id_evento);
+  }
+
+  getMultimediaById(id:number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + "getMultimediaById/" + id);
+  }
 
   eliminarMultimedia(id: number): Observable<any> {
     return this.http.delete<any>(this.apiUrl + "eliminarMultimedia/" + id);
+  }
+
+  crearMultimedia(multimedia: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "crearMultimedia", multimedia);
+  }
+
+  actualizarMultimedia(id: number, multimedia: any): Observable<any> {
+    return this.http.put<any>(this.apiUrl + "editarMultimedia", multimedia);
   }
 }
