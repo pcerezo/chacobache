@@ -10,6 +10,7 @@ import { BlogNoticiasService } from '../../services/blog-noticias.service';
 import { RouterLink } from '@angular/router';
 import { ArticuloBlog } from '../../models/articuloBlog';
 import { TruncatePipe } from '../../truncate.pipe';
+import { EventUpdateService } from '../../services/event-update.service';
 
 @Component({
   selector: 'app-blog-noticias',
@@ -30,11 +31,19 @@ export class BlogNoticiasComponent {
   offset: number;
   limit: number;
 
-  constructor(private blogNoticiasService: BlogNoticiasService) {
+  constructor(private blogNoticiasService: BlogNoticiasService, private eventUpdateService: EventUpdateService) {
     this.page = 1;
     this.offset = 0;
     this.limit = 5;
+    this.articulos = [];
+    this.articulosFiltrados = [];
     this.getArticulos();
+  }
+
+  ngOnInit() {
+    this.eventUpdateService.eventUpdated$.subscribe(() => {
+      this.getArticulos();
+    });
   }
 
   private calcularOffset() {

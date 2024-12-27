@@ -36,8 +36,6 @@ export class ListaEventosComponent implements OnInit{
   listaEventos: any[] = [];
   datosCargados: Boolean;
   readonly dialog = inject(MatDialog);
-  contador: number;
-  limite: number;
   
   constructor(
     private eventosService: EventsService,
@@ -45,8 +43,6 @@ export class ListaEventosComponent implements OnInit{
     private eventUpdateService: EventUpdateService
   ) {
     this.datosCargados = false;
-    this.contador = 0;
-    this.limite = 5;
     this.getEventos();
     console.log("En constructor()");
   }

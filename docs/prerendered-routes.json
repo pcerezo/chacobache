@@ -5,6 +5,7 @@
     "/admin/articulos/crearArticulo",
     "/admin/eventos",
     "/admin/eventos/crearEvento",
+    "/admin/multimedia",
     "/blogNoticias",
     "/conciertosEnVivo",
     "/contacto",

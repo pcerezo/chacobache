@@ -1,8 +1,18 @@
-<div class="container mt-5">
+<div class="container principal mt-5">
     <h1 class="text-center">Galería de nuestros conciertos en vivo</h1>
     <!-- Por cada evento, si tiene material multimedia, se muestra-->
     @if (eventosPasados.length == 0) {
-        <h2 class="text-center">Pronto desvelaremos recuerdos de nuestros eventos</h2>
+        <div class="event-list">
+            <mat-card class="event-card">
+              <mat-card-header>
+                <mat-card-title>Aún no se han subido</mat-card-title>
+                <!-- <mat-card-subtitle>{{ evento.fecha | date }}</mat-card-subtitle> -->
+              </mat-card-header>
+              <mat-card-content>
+                <p>Pronto desvelaremos recuerdos de nuestros eventos</p>
+              </mat-card-content>
+            </mat-card>
+        </div>
     }
     @for (evento of eventosPasados; track $index) {
     <div class="multimedia-evento mt-5">
@@ -20,16 +30,6 @@
                 <iframe #selectedImageElement width="560" height="315" frameborder="0" 
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </p>
-
-            <!--
-            <div id="selected-image-container" class="d-flex justify-content-center mt-4 row">
-                <video controls class="video-fluid">
-                    <source #selectedImageElement type="video/mp4">
-                    Tu navegador no soporta videos HTML5.
-                </video>
-                <p>{{ selectedImage.descripcion }}</p>
-            </div>
-            -->
         }
     
         <!-- Carousel de miniaturas -->
