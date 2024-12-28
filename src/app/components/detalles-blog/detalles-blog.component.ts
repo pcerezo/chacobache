@@ -34,6 +34,10 @@ export class DetallesBlogComponent {
     this.getArticuloBlogById();
   }
 
+  ngOnInit() {
+    this.getArticuloBlogById();
+  }
+
   getArticuloBlogById() {
     this.blogNoticiasService.getArticuloById(this.id).subscribe((res) => {
       if (res) {
