@@ -2,9 +2,6 @@
   <!-- Título del evento -->
   <h2 class="text-center">{{evento.lugar}} - {{evento.fecha | date}}</h2>
   
-  <div class="header-buttons">
-    <button class="btn btn-create" routerLink="/admin/multimedia/crearMultimedia">+ Añadir multimedia</button>
-  </div>
   <!-- Imagen principal seleccionada -->
   @if (listaMultimedia.length > 0) {
     @if(tipoSelectedImage == 'imagen') { 

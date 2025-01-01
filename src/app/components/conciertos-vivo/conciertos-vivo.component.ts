@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Evento } from '../../models/evento';
 import { EventsService } from '../../services/events.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,7 +33,7 @@ export class ConciertosVivoComponent {
   
 
   // ViewChild to manipulate the image element for fade-in effect
-  @ViewChild('selectedImageElement', { static: false }) selectedImageElement!: ElementRef<HTMLImageElement>;
+  @ViewChildren('selectedImageElement') selectedImageElements!: QueryList<ElementRef<HTMLImageElement>>;
 
   constructor(
     private eventsService: EventsService, 
@@ -51,17 +51,32 @@ export class ConciertosVivoComponent {
   }
 
   updateSelectedImageInicial() {
-    if (this.selectedImageElement && this.thumbnails.length > 0) {
-      this.selectedImageElement.nativeElement.src = this.thumbnails[0].enlace;
-      this.selectedImageElement.nativeElement.alt = this.thumbnails[0].descripcion;
-      this.selectedImageElement.nativeElement.classList.add('show'); 
-    }
+    if (this.selectedImageElements && this.thumbnails.length > 0) {
+      
+      const firstThumbnail = this.thumbnails[0];
+      let selectedImageElement: ElementRef<HTMLImageElement> | undefined;
 
-    if (this.thumbnails[0] && (this.thumbnails[0].enlace.endsWith('.mp4') || this.thumbnails[0].enlace.includes('youtube'))) {
-      this.tipoSelectedImage = 'video';
-    }
-    else {
-      this.tipoSelectedImage = 'imagen';
+      // Usar un bucle for para encontrar el elemento con el ID correspondiente
+      for (let i = 0; i < this.selectedImageElements.length; i++) {
+        const el = this.selectedImageElements.toArray()[i];
+        if (el.nativeElement.id === `selected-image-${firstThumbnail.idEvento}`) {
+          selectedImageElement = el;
+          break;
+        }
+      }
+
+      if (selectedImageElement) {
+        selectedImageElement.nativeElement.src = firstThumbnail.enlace;
+        selectedImageElement.nativeElement.alt = firstThumbnail.descripcion;
+        selectedImageElement.nativeElement.classList.add('show'); 
+      }
+
+      if (firstThumbnail.enlace.endsWith('.mp4') || firstThumbnail.enlace.includes('youtube')) {
+        this.tipoSelectedImage = 'video';
+      }
+      else {
+        this.tipoSelectedImage = 'imagen';
+      }
     }
   }
 
@@ -119,29 +134,41 @@ export class ConciertosVivoComponent {
    
 
   // Function that handles thumbnail click event
-  onThumbnailClick(imagen: any): void {
+  onThumbnailClick(imagen: any, idEvento: number): void {
     var enlace: any;
-    // Remove the fade-in class, then update the image source
-    if (this.selectedImageElement) {
-      this.selectedImageElement.nativeElement.classList.remove('show');
+    let selectedImageElement: ElementRef<HTMLImageElement> | undefined;
+    console.log("onThumbnailClick()");
+    // Usar un bucle for para encontrar el elemento con el ID correspondiente
+    for (let i = 0; i < this.selectedImageElements.length; i++) {
+      const el = this.selectedImageElements.toArray()[i];
+      console.log("el.nativeElement.id" + el.nativeElement.id);
+      if (el.nativeElement.id === `selected-image-${idEvento}`) {
+        selectedImageElement = el;
+        break;
+      }
     }
 
-    if (imagen.enlace.includes('youtube')) {
-      this.tipoSelectedImage = 'video';
-      enlace = this.raizVideoYt + this.getVideoByUrlImagen(imagen.enlace);
-    }
-    else {
-      this.tipoSelectedImage = 'imagen';
-      enlace = imagen.enlace;
-    }
+    if (selectedImageElement) {
+      // Remove the fade-in class, then update the image source
+      selectedImageElement.nativeElement.classList.remove('show');
 
-    // Delay the update to synchronize with the fade-out
-    setTimeout(() => {
-      this.selectedImage = imagen; // Change the image source
-      this.selectedImageElement.nativeElement.classList.add('show'); // Fade-in animation
-      this.selectedImageElement.nativeElement.alt = imagen.descripcion;
-      this.selectedImageElement.nativeElement.src = enlace;
-    }, 200);
+      if (imagen.enlace.includes('youtube')) {
+        this.tipoSelectedImage = 'video';
+        enlace = this.raizVideoYt + this.getVideoByUrlImagen(imagen.enlace);
+      }
+      else {
+        this.tipoSelectedImage = 'imagen';
+        enlace = imagen.enlace;
+      }
+
+      // Delay the update to synchronize with the fade-out
+      setTimeout(() => {
+        this.selectedImage = imagen; // Change the image source
+        selectedImageElement.nativeElement.classList.add('show'); // Fade-in animation
+        selectedImageElement.nativeElement.alt = imagen.descripcion;
+        selectedImageElement.nativeElement.src = enlace;
+      }, 200);
+    }
   }
 
   getEventosPasadosConMultimedia() {
@@ -164,7 +191,8 @@ export class ConciertosVivoComponent {
           this.thumbnails.push({
             enlace: multimedia.enlace_contenido,
             descripcion: multimedia.descripcion,
-            tipo: tipo
+            tipo: tipo,
+            idEvento: multimedia.id_evento
           });
         }
       }

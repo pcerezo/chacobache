@@ -20,6 +20,7 @@ import { EditarArticuloComponent } from './components/admin/articulosBlog/editar
 import { Error404Component } from './components/error404/error404.component';
 import { EditarMultimediaComponent } from './components/admin/multimedia/editar-multimedia/editar-multimedia.component';
 import { ListaMultimediaComponent } from './components/admin/multimedia/lista-multimedia/lista-multimedia.component';
+import { CrearEditarMultimediaModalComponent } from './components/admin/multimedia/crear-editar-multimedia-modal/crear-editar-multimedia-modal.component';
 
 export const routes: Routes = [
     {path: 'inicio', component: InicioComponent},
@@ -43,6 +44,8 @@ export const routes: Routes = [
     {path: 'admin/articulos/editarArticulo/:id', component: EditarArticuloComponent, canActivate: [AuthGuard]},
     {path: 'admin/multimedia/editarMultimedia/:id', component: EditarMultimediaComponent, canActivate: [AuthGuard]},
     {path: 'admin/multimedia', component: ListaMultimediaComponent, canActivate: [AuthGuard]},
+    {path: 'admin/multimedia/crearMultimedia', component: CrearEditarMultimediaModalComponent, canActivate: [AuthGuard]},
+    {path: 'admin/multimedia/editarMultimedia/:id', component: EditarMultimediaComponent, canActivate: [AuthGuard]},
     //{path: 'admin/articulos/eliminarArticulo/:id', component: BorrarArticuloComponent, canActivate: [AuthGuard]},
     
     {path: '**', component: Error404Component }

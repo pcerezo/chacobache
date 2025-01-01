@@ -22,7 +22,7 @@
         <!-- Imagen principal seleccionada -->
         @if(tipoSelectedImage == 'imagen') { 
             <div id="selected-image-container" class="d-flex justify-content-center mt-4">
-                <img #selectedImageElement id="selected-image" class="img-fluid fade-in" alt="Imagen seleccionada">
+                <img #selectedImageElement id="selected-image-{{evento.id}}" class="img-fluid fade-in" alt="Imagen seleccionada">
             </div>
         }
         @if(tipoSelectedImage == 'video') {
@@ -38,12 +38,14 @@
                 <div class="carousel-item active">
                     <div class="row">
                         @for (thumbnail of thumbnails; track $index) {
-                            <div class="col-md-3">
-                                <img [src]="thumbnail.enlace" class="d-block w-100 img-thumbnail clickable"
-                                    [attr.data-full-image]="thumbnail.enlace"
-                                    (click)="onThumbnailClick(thumbnail)"
-                                    [alt]="thumbnail.descripcion">
-                            </div>
+                            @if(thumbnail.idEvento == evento.id) {
+                                <div class="col-md-3">
+                                    <img [src]="thumbnail.enlace" class="d-block w-100 img-thumbnail clickable"
+                                        [attr.data-full-image]="thumbnail.enlace"
+                                        (click)="onThumbnailClick(thumbnail, evento.id)"
+                                        [alt]="thumbnail.descripcion">
+                                </div>
+                            }
                         }
                     </div>
                 </div>

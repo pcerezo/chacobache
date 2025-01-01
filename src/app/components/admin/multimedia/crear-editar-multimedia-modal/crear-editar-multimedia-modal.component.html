@@ -1,0 +1,51 @@
+<div class="form-container">
+    <div class="header">
+      <button mat-raised-button class="back-button" (click)="volver()">Atrás</button>
+      <h2 class="form-title">{{ page_title }}</h2>
+    </div>
+    <form [formGroup]="multimediaForm" (ngSubmit)="onSubmit()" class="multimedia-form">
+      <mat-card>
+        <mat-card-content>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Evento relacionado</mat-label>
+              <mat-select formControlName="id_evento" required>
+                @for (evento of listaEventos; track $index) {
+                    <mat-option [value]="evento.id">
+                    {{ evento.lugar }} - {{ evento.fecha | date }}
+                    </mat-option>
+                }
+                </mat-select>
+                @if(multimediaForm.get('id_evento')?.hasError('required')) {
+                    <mat-error>El evento es obligatorio</mat-error>
+                }
+            </mat-form-field>
+          </div>
+  
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Enlace del contenido</mat-label>
+                <input matInput formControlName="enlace_contenido" required>
+                @if(multimediaForm.get('enlace_contenido')?.hasError('required')) {
+                  <mat-error>El enlace del contenido es obligatorio</mat-error>
+                }
+            </mat-form-field>
+          </div>
+  
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput rows="5" formControlName="descripcion" required></textarea>
+              @if(multimediaForm.get('descripcion')?.hasError('required')) {
+                <mat-error>La descripción es obligatoria</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="button-group">
+            <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="multimediaForm.invalid">Guardar</button>
+          </mat-card-actions>
+      </mat-card>
+    </form>
+</div>

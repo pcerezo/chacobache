@@ -1,7 +1,7 @@
 // filepath: /c:/Users/pcere/OneDrive/Documentos/proyectos/Chacobache/src/app/components/admin/multimedia/editar-multimedia/editar-multimedia.component.ts
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MultimediaService } from '../../../../services/multimedia.service';
 import { EventsService } from '../../../../services/events.service';
 import { EventUpdateService } from '../../../../services/event-update.service';
@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-editar-multimedia',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, MatDatepickerModule, MatSelectModule],
+  imports: [CommonModule, RouterLink, MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, MatDatepickerModule, MatSelectModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './editar-multimedia.component.html',
   styleUrl: './editar-multimedia.component.css'
@@ -233,4 +233,12 @@ export class EditarMultimediaComponent implements OnInit {
   }
 
   volver() {}
+
+  addMultimedia() {
+    this.router.navigate(['/admin/multimedia/crearMultimedia']);
+  }
+
+  editMultimedia(id: number) {
+    this.router.navigate(['/admin/multimedia/editarMultimedia', id]);
+  }
 }
