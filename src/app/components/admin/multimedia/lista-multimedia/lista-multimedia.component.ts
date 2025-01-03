@@ -11,6 +11,7 @@ import { TruncatePipe } from '../../../../truncate.pipe';
 import { EventsService } from '../../../../services/events.service';
 import { EventUpdateService } from '../../../../services/event-update.service';
 import { MatDialog } from '@angular/material/dialog';
+import { CrearEditarMultimediaModalComponent } from '../crear-editar-multimedia-modal/crear-editar-multimedia-modal.component';
 
 @Component({
   selector: 'app-lista-multimedia',
@@ -56,6 +57,13 @@ export class ListaMultimediaComponent {
         this.datosCargados = true;
         this.cdr.detectChanges();
       }
+    });
+  }
+
+  addMultimedia() {
+    this.dialog.open(CrearEditarMultimediaModalComponent, {
+      width: '600px',
+      data: {id: 0}
     });
   }
 }

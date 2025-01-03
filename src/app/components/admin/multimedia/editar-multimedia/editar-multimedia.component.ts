@@ -16,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { Evento } from '../../../../models/evento';
 import { TruncatePipe } from '../../../../truncate.pipe';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { CrearEditarMultimediaModalComponent } from '../crear-editar-multimedia-modal/crear-editar-multimedia-modal.component';
 
 @Component({
   selector: 'app-editar-multimedia',
@@ -47,7 +49,9 @@ export class EditarMultimediaComponent implements OnInit {
     private multimediaService: MultimediaService, 
     private eventsService: EventsService,
     private router: Router,
-    private eventUpdateService: EventUpdateService) {
+    private eventUpdateService: EventUpdateService,
+    private dialog: MatDialog
+    ) {
     this.page_title = "Crear contenido multimedia";
     this.evento = {lugar: '', fecha: new Date(), descripcion: '', enlace_pdf: '', enlace_entradas: '', tipo: '', id: 0};
     this.multimedia = new Multimedia(0, { id: 0, lugar: '', fecha: new Date(), descripcion: '', enlace_pdf: '', enlace_entradas: '', tipo: '' }, '', '');
@@ -93,7 +97,22 @@ export class EditarMultimediaComponent implements OnInit {
   }
 
   onThumbnailClick(imagen: any): void {
-    var enlace: any;
+    const dialogRef = this.dialog.open(CrearEditarMultimediaModalComponent, {
+      width: '600px',
+      data: {
+        id_evento: imagen.idEvento,
+        enlace_contenido: imagen.enlace,
+        descripcion: imagen.descripcion
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Handle the result if needed
+      }
+    });
+
+    /*var enlace: any;
     // Remove the fade-in class, then update the image source
     if (this.selectedImageElement) {
       this.selectedImageElement.nativeElement.classList.remove('show');
@@ -114,7 +133,7 @@ export class EditarMultimediaComponent implements OnInit {
       this.selectedImageElement.nativeElement.classList.add('show'); // Fade-in animation
       this.selectedImageElement.nativeElement.alt = imagen.descripcion;
       this.selectedImageElement.nativeElement.src = enlace;
-    }, 200);
+    }, 200);*/
   }
 
   getVideoByUrlImagen(url: string) {
