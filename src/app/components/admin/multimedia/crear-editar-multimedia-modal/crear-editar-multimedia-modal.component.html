@@ -44,7 +44,8 @@
         </mat-card-content>
         <mat-card-actions class="button-group">
             <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="multimediaForm.invalid">Guardar</button>
+            <button mat-raised-button class="grey-button" type="button" (click)="onEliminar()">Eliminar</button>
+            <button mat-raised-button class="green-button" type="submit" [disabled]="multimediaForm.invalid">Guardar</button>
           </mat-card-actions>
       </mat-card>
     </form>

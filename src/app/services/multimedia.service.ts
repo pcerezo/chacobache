@@ -29,6 +29,6 @@ export class MultimediaService {
   }
 
   actualizarMultimedia(id: number, multimedia: any): Observable<any> {
-    return this.http.put<any>(this.apiUrl + "editarMultimedia", multimedia);
+    return this.http.put<any>(this.apiUrl + "editarMultimedia/" + id, multimedia);
   }
 }

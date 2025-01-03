@@ -1,5 +1,10 @@
 <div class="container principal multimedia-evento mt-5">
   <!-- Título del evento -->
+  <div class="header-buttons">
+    <button mat-raised-button class="back-button" (click)="volver()">Atrás</button>
+    <h1 class="event-title text-center">{{page_title}}</h1>
+  </div>
+
   <h2 class="text-center">{{evento.lugar}} - {{evento.fecha | date}}</h2>
   
   <!-- Imagen principal seleccionada -->

@@ -26,7 +26,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class CrearEditarMultimediaModalComponent {
   multimediaForm!: FormGroup;
-  id: number = 0;
+  //id: number = 0;
   page_title: string;
   listaEventos: any[] = [];
 
@@ -41,12 +41,13 @@ export class CrearEditarMultimediaModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) 
     {
     this.page_title = "Contenido multimedia";
-    this.route.paramMap.subscribe(params => {
+    /*this.route.paramMap.subscribe(params => {
       this.id = + (params.get('id') || 0);
-    });
+    });*/
   }
 
   ngOnInit(): void {
+    console.log("Data: ", this.data);
     this.multimediaForm = this.fb.group({
       id_evento: [this.data.id_evento, Validators.required],
       enlace_contenido: [this.data.enlace_contenido, Validators.required],
@@ -68,20 +69,20 @@ export class CrearEditarMultimediaModalComponent {
   onSubmit(): void {
     if (this.multimediaForm && this.multimediaForm.valid) {
       const multimediaData = this.multimediaForm.value;
-      if (this.data.id_evento) {
-        this.multimediaService.actualizarMultimedia(this.id, multimediaData).subscribe((resultado) => {
+      if (this.data.id) {
+        this.multimediaService.actualizarMultimedia(this.data.id, multimediaData).subscribe((resultado) => {
           this.eventUpdateService.notifyEventUpdated();
-          console.log('Resultado:', resultado);
+          console.log('Editar multimedia. Resultado:', resultado);
           this.dialogRef.close(true);
         });
       } else {
         this.multimediaService.crearMultimedia(multimediaData).subscribe((resultado) => {
           this.eventUpdateService.notifyEventUpdated();
-          console.log('Resultado:', resultado);
+          console.log('Añadir multimedia. Resultado:', resultado);
           this.dialogRef.close(true);
         });
 
-        this.router.navigate(['/admin/multimedia'], { queryParams: { t: new Date().getTime() } });
+        //this.router.navigate(['/admin/multimedia'], { queryParams: { t: new Date().getTime() } });
       }
     }
   }
@@ -89,6 +90,16 @@ export class CrearEditarMultimediaModalComponent {
   onCancel(): void {
     if (this.multimediaForm) {
       this.multimediaForm.reset();
+    }
+  }
+
+  onEliminar(): void {
+    if (this.data.id) {
+      this.multimediaService.eliminarMultimedia(this.data.id).subscribe((resultado) => {
+        this.eventUpdateService.notifyEventUpdated();
+        console.log('Eliminar multimedia. Resultado:', resultado);
+        this.dialogRef.close(true);
+      });
     }
   }
 

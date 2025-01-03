@@ -60,12 +60,9 @@ export class EditarMultimediaComponent implements OnInit {
       if (this.id) {
         this.page_title = "Editar contenido multimedia";
         this.cargarEvento(this.id);
-        this.rellenarMultimedia();
       }
     });
-  }
-
-  ngOnInit(): void {
+    this.rellenarMultimedia();
     this.tipoSelectedImage = 'imagen';
     this.multimediaForm = this.fb.group({
       id_evento: ['', Validators.required],
@@ -73,6 +70,12 @@ export class EditarMultimediaComponent implements OnInit {
       descripcion: ['', Validators.required]
     });
     this.cargarEvento(this.id);
+  }
+
+  ngOnInit(): void {
+    this.eventUpdateService.eventUpdated$.subscribe(() => {
+      this.rellenarMultimedia();
+    });
   }
 
   cargarEvento(idEvento: number) {
@@ -97,43 +100,20 @@ export class EditarMultimediaComponent implements OnInit {
   }
 
   onThumbnailClick(imagen: any): void {
+    console.log('Imagen: ', imagen);
     const dialogRef = this.dialog.open(CrearEditarMultimediaModalComponent, {
       width: '600px',
       data: {
-        id_evento: imagen.idEvento,
+        id: imagen.id,
+        id_evento: imagen.id_evento,
         enlace_contenido: imagen.enlace,
         descripcion: imagen.descripcion
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // Handle the result if needed
-      }
+
     });
-
-    /*var enlace: any;
-    // Remove the fade-in class, then update the image source
-    if (this.selectedImageElement) {
-      this.selectedImageElement.nativeElement.classList.remove('show');
-    }
-
-    if (imagen.enlace.includes('youtube')) {
-      this.tipoSelectedImage = 'video';
-      enlace = this.raizVideoYt + this.getVideoByUrlImagen(imagen.enlace);
-    }
-    else {
-      this.tipoSelectedImage = 'imagen';
-      enlace = imagen.enlace;
-    }
-
-    // Delay the update to synchronize with the fade-out
-    setTimeout(() => {
-      this.selectedImage = imagen; // Change the image source
-      this.selectedImageElement.nativeElement.classList.add('show'); // Fade-in animation
-      this.selectedImageElement.nativeElement.alt = imagen.descripcion;
-      this.selectedImageElement.nativeElement.src = enlace;
-    }, 200);*/
   }
 
   getVideoByUrlImagen(url: string) {
@@ -143,6 +123,7 @@ export class EditarMultimediaComponent implements OnInit {
   }
 
   rellenarMultimedia() {
+    this.thumbnails = [];
     this.multimediaService.getMultimediaByEventoId(this.id).subscribe((multimediaResp) => {
       if (multimediaResp) {
         this.listaMultimedia = multimediaResp;
@@ -160,6 +141,9 @@ export class EditarMultimediaComponent implements OnInit {
           }
 
           this.thumbnails.push({
+            id: multimedia.id,
+            id_evento: multimedia.id_evento,
+            //lugar: multimedia.id_evento.lugar,
             enlace: multimedia.enlace_contenido,
             descripcion: multimedia.descripcion,
             tipo: tipo
@@ -228,6 +212,7 @@ export class EditarMultimediaComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log("this.multimediaForm.value: " + this.multimediaForm.value);
     if (this.multimediaForm && this.multimediaForm.valid) {
       const multimediaData = this.multimediaForm.value;
       if (this.id) {
@@ -251,13 +236,7 @@ export class EditarMultimediaComponent implements OnInit {
     }
   }
 
-  volver() {}
-
-  addMultimedia() {
-    this.router.navigate(['/admin/multimedia/crearMultimedia']);
-  }
-
-  editMultimedia(id: number) {
-    this.router.navigate(['/admin/multimedia/editarMultimedia', id]);
+  volver() {
+    this.router.navigate(['/admin/multimedia']);
   }
 }
