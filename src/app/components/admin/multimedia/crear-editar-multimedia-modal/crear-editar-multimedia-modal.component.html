@@ -1,7 +1,7 @@
 <div class="form-container">
-    <div class="header">
-      <button mat-raised-button class="back-button" (click)="volver()">Atrás</button>
-      <h2 class="form-title">{{ page_title }}</h2>
+    <div class="">
+      <!--<button mat-raised-button class="back-button" (click)="volver()">Atrás</button> -->
+      <h2 class="text-center form-title">{{ page_title }}</h2>
     </div>
     <form [formGroup]="multimediaForm" (ngSubmit)="onSubmit()" class="multimedia-form">
       <mat-card>
@@ -44,7 +44,8 @@
         </mat-card-content>
         <mat-card-actions class="button-group">
             <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="multimediaForm.invalid">Guardar</button>
+            <button mat-raised-button class="grey-button" type="button" (click)="onEliminar()">Eliminar</button>
+            <button mat-raised-button class="green-button" type="submit" [disabled]="multimediaForm.invalid">Guardar</button>
           </mat-card-actions>
       </mat-card>
     </form>

@@ -1,6 +1,6 @@
 .header-buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -33,12 +33,6 @@
 
 .mt-5 {
     margin-top: 3rem;
-}
-
-.header-buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
 }
 
 .btn-create {
@@ -87,4 +81,8 @@
 .img-thumbnail {
     max-height: 300px;
     object-fit: cover;
+}
+
+.back-button {
+    margin-right: 20px;
 }

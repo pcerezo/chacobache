@@ -16,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { Evento } from '../../../../models/evento';
 import { TruncatePipe } from '../../../../truncate.pipe';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { CrearEditarMultimediaModalComponent } from '../crear-editar-multimedia-modal/crear-editar-multimedia-modal.component';
 
 @Component({
   selector: 'app-editar-multimedia',
@@ -47,7 +49,9 @@ export class EditarMultimediaComponent implements OnInit {
     private multimediaService: MultimediaService, 
     private eventsService: EventsService,
     private router: Router,
-    private eventUpdateService: EventUpdateService) {
+    private eventUpdateService: EventUpdateService,
+    private dialog: MatDialog
+    ) {
     this.page_title = "Crear contenido multimedia";
     this.evento = {lugar: '', fecha: new Date(), descripcion: '', enlace_pdf: '', enlace_entradas: '', tipo: '', id: 0};
     this.multimedia = new Multimedia(0, { id: 0, lugar: '', fecha: new Date(), descripcion: '', enlace_pdf: '', enlace_entradas: '', tipo: '' }, '', '');
@@ -56,12 +60,9 @@ export class EditarMultimediaComponent implements OnInit {
       if (this.id) {
         this.page_title = "Editar contenido multimedia";
         this.cargarEvento(this.id);
-        this.rellenarMultimedia();
       }
     });
-  }
-
-  ngOnInit(): void {
+    this.rellenarMultimedia();
     this.tipoSelectedImage = 'imagen';
     this.multimediaForm = this.fb.group({
       id_evento: ['', Validators.required],
@@ -69,6 +70,12 @@ export class EditarMultimediaComponent implements OnInit {
       descripcion: ['', Validators.required]
     });
     this.cargarEvento(this.id);
+  }
+
+  ngOnInit(): void {
+    this.eventUpdateService.eventUpdated$.subscribe(() => {
+      this.rellenarMultimedia();
+    });
   }
 
   cargarEvento(idEvento: number) {
@@ -93,28 +100,20 @@ export class EditarMultimediaComponent implements OnInit {
   }
 
   onThumbnailClick(imagen: any): void {
-    var enlace: any;
-    // Remove the fade-in class, then update the image source
-    if (this.selectedImageElement) {
-      this.selectedImageElement.nativeElement.classList.remove('show');
-    }
+    console.log('Imagen: ', imagen);
+    const dialogRef = this.dialog.open(CrearEditarMultimediaModalComponent, {
+      width: '600px',
+      data: {
+        id: imagen.id,
+        id_evento: imagen.id_evento,
+        enlace_contenido: imagen.enlace,
+        descripcion: imagen.descripcion
+      }
+    });
 
-    if (imagen.enlace.includes('youtube')) {
-      this.tipoSelectedImage = 'video';
-      enlace = this.raizVideoYt + this.getVideoByUrlImagen(imagen.enlace);
-    }
-    else {
-      this.tipoSelectedImage = 'imagen';
-      enlace = imagen.enlace;
-    }
+    dialogRef.afterClosed().subscribe(result => {
 
-    // Delay the update to synchronize with the fade-out
-    setTimeout(() => {
-      this.selectedImage = imagen; // Change the image source
-      this.selectedImageElement.nativeElement.classList.add('show'); // Fade-in animation
-      this.selectedImageElement.nativeElement.alt = imagen.descripcion;
-      this.selectedImageElement.nativeElement.src = enlace;
-    }, 200);
+    });
   }
 
   getVideoByUrlImagen(url: string) {
@@ -124,6 +123,7 @@ export class EditarMultimediaComponent implements OnInit {
   }
 
   rellenarMultimedia() {
+    this.thumbnails = [];
     this.multimediaService.getMultimediaByEventoId(this.id).subscribe((multimediaResp) => {
       if (multimediaResp) {
         this.listaMultimedia = multimediaResp;
@@ -141,6 +141,9 @@ export class EditarMultimediaComponent implements OnInit {
           }
 
           this.thumbnails.push({
+            id: multimedia.id,
+            id_evento: multimedia.id_evento,
+            //lugar: multimedia.id_evento.lugar,
             enlace: multimedia.enlace_contenido,
             descripcion: multimedia.descripcion,
             tipo: tipo
@@ -209,6 +212,7 @@ export class EditarMultimediaComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log("this.multimediaForm.value: " + this.multimediaForm.value);
     if (this.multimediaForm && this.multimediaForm.valid) {
       const multimediaData = this.multimediaForm.value;
       if (this.id) {
@@ -232,13 +236,7 @@ export class EditarMultimediaComponent implements OnInit {
     }
   }
 
-  volver() {}
-
-  addMultimedia() {
-    this.router.navigate(['/admin/multimedia/crearMultimedia']);
-  }
-
-  editMultimedia(id: number) {
-    this.router.navigate(['/admin/multimedia/editarMultimedia', id]);
+  volver() {
+    this.router.navigate(['/admin/multimedia']);
   }
 }
