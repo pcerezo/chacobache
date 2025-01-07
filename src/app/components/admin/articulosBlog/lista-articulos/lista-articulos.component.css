@@ -119,3 +119,8 @@ mat-card-content {
   background-color: #c823336b; /* Rojo más oscuro al pasar el ratón */
   border-color: #000000; /* Borde más oscuro */
 }
+
+.back-button {
+    width: fit-content;
+    margin-right: 20px;
+}

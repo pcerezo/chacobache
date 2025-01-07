@@ -1,1 +1,38 @@
-<p>lista-pregunta-respuesta works!</p>
+<div class="principal">
+    <div id="preguntasRespuestas">
+        <h1 class="event-title">Preguntas y Respuestas</h1>
+        <div class="titular">
+            <button mat-raised-button class="back-button" (click)="volver()">Atrás</button>
+            <h3 class="event-title">Listado de Preguntas y Respuestas</h3>
+        </div>
+        <div class="header-buttons">
+            <button class="btn btn-create" (click)="addPreguntaRespuesta()">+ Añadir Pregunta/Respuesta</button>
+        </div>
+        <div *ngIf="listaPreguntasRespuestas.length > 0" class="event-list">
+            <mat-card class="event-card" *ngFor="let preguntaRespuesta of listaPreguntasRespuestas; let i = index">
+                <mat-card-header>
+                    <mat-card-title>{{ preguntaRespuesta.asunto }}</mat-card-title>
+                    <mat-card-subtitle>{{ preguntaRespuesta.fecha_publicacion | date }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{ preguntaRespuesta.texto_pregunta | truncate: 50 }}</p>
+                    <p>{{ preguntaRespuesta.texto_respuesta | truncate: 50 }}</p>
+                </mat-card-content>
+                <mat-card-actions class="event-actions">
+                    <button class="btn btn-edit" (click)="editPreguntaRespuesta(preguntaRespuesta.id)">Editar</button>
+                    <button class="btn btn-delete" (click)="deletePreguntaRespuesta(preguntaRespuesta.id)">Eliminar</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div *ngIf="listaPreguntasRespuestas.length === 0" class="event-list">
+            <mat-card class="event-card">
+                <mat-card-header>
+                    <mat-card-title>No hay preguntas y respuestas</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>Por ahora... 🚀</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

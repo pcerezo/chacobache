@@ -1,3 +1,167 @@
-.eventosFuturos {
-    margin-top: 2%;
+.event-container {
+    padding: 20px;
+}
+  
+.event-title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    color: #2c3e50;
+}
+  
+.event-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+  
+.event-card {
+    width: 300px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    height: auto;
+}
+  
+.event-card:hover {
+    transform: scale(1.05);
+}
+  
+.event-avatar {
+    /*background-color: #3f51b5;*/
+    background: url('/chacobache/assets/utils/chacheEstrellita.png');
+    background-size: contain;
+}
+  
+mat-card-title,
+mat-card-subtitle {
+    text-align: center;
+}
+  
+mat-card-actions {
+    display: flex;
+    justify-content: space-around;
+}
+  
+a {
+    text-decoration: none;
+    color: #3f51b5;
+    font-weight: bold;
+}
+  
+#separador {
+    margin: 60px auto;
+    border-top: 3px double;
+    width: 50%;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 20px;
+    margin-left: 25%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button {
+    width: 150px;
+}
+
+#producciones {
+    display: grid;
+}
+
+.alert {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    margin-top: 10px;
+    width: fit-content;
+    display: flex;
+    justify-self: center;
+}
+
+.fade.show {
+    opacity: 1; /* Visible cuando se aplica la clase .show */
+}
+  
+.header-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: 15%;
+}
+
+.btn-create, .btn-edit,
+.btn-delete {
+  border-radius: 8px; /* Esquinas ligeramente redondeadas */
+  font-size: 14px;
+  font-weight: bold;
+  border: 2px ridge transparent; /* Borde inicial transparente */
+  transition: all 0.3s ease; /* Transición suave para los efectos */
+}
+
+.btn-create {
+  background-color: #28a74600; /* Color de fondo verde */
+  color: rgb(0, 0, 0);
+  border-color: #000501; /* Borde visible */
+}
+
+.btn-create:hover {
+  background-color: #21883771; /* Verde más oscuro al pasar el ratón */
+  border-color: #000000; /* Borde más oscuro */
+}
+
+.btn-edit {
+    background-color: #a79a2800; /* Color de fondo verde */
+    color: rgb(0, 0, 0);
+    border-color: #000501; /* Borde visible */
+}
+  
+.btn-edit:hover {
+    background-color: #fcff5271; /* Verde más oscuro al pasar el ratón */
+    border-color: #000000; /* Borde más oscuro */
+}
+
+.btn-delete {
+  background-color: #dc354600; /* Color de fondo rojo */
+  color: rgb(0, 0, 0);
+  border-color: #000000; /* Borde visible */
+}
+
+.btn-delete:hover {
+  background-color: #c823336b; /* Rojo más oscuro al pasar el ratón */
+  border-color: #000000; /* Borde más oscuro */
+}
+
+.event-actions {
+    margin-top: auto;
+    margin-bottom: 2px;
+}
+
+.back-button {
+    margin-right: 20px;
 }

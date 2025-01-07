@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { TruncatePipe } from '../../../../truncate.pipe';
@@ -45,7 +45,8 @@ export class ListaArticulosComponent implements OnInit {
   constructor(
     private blogNoticiasService: BlogNoticiasService,
     private cdr: ChangeDetectorRef,
-    private eventUpdateService: EventUpdateService
+    private eventUpdateService: EventUpdateService,
+    private router: Router
   ) {
     this.page = 1;
     this.offset = 0;
@@ -113,5 +114,9 @@ export class ListaArticulosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed: ' + result);
     });
+  }
+
+  volver() {
+    this.router.navigate(['/admin']);
   }
 }

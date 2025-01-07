@@ -2,6 +2,7 @@
     <div id="eventosFuturos">
         <h1 class="event-title">Lista de eventos</h1>
         <div class="header-buttons">
+            <button mat-raised-button class="back-button" (click)="volver()">Atrás</button>
             <button class="btn btn-create" routerLink="/admin/eventos/crearEvento">+ Crear evento</button>
         </div>
         @if(listaEventos.length > 0) {
