@@ -54,7 +54,7 @@ export class CrearPreguntaRespuestaComponent {
       asunto: [this.data.asunto, Validators.required],
       texto_pregunta: [this.data.texto_pregunta, Validators.required],
       texto_respuesta: [this.data.texto_respuesta, Validators.required],
-      fecha_publicacion: [this.data.fecha_publicacion, Validators.required]
+      fecha_publicacion: [new Date()]
     });
   }
 
