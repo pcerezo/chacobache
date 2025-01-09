@@ -11,6 +11,12 @@
     margin-bottom: 20px;
 }
 
+.titular {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
 .header-buttons {
     display: flex;
     justify-content: flex-end;
@@ -65,4 +71,8 @@ mat-card-content {
 
 .btn-delete {
     color: #f44336;
+}
+
+.back-button {
+    margin-right: 20px;
 }

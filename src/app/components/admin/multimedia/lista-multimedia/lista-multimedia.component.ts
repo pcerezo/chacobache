@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TruncatePipe } from '../../../../truncate.pipe';
 import { EventsService } from '../../../../services/events.service';
 import { EventUpdateService } from '../../../../services/event-update.service';
@@ -36,7 +36,8 @@ export class ListaMultimediaComponent {
   constructor(
     private eventosService: EventsService,
     private cdr: ChangeDetectorRef,
-    private eventUpdateService: EventUpdateService
+    private eventUpdateService: EventUpdateService,
+    private router: Router
   ) {
     this.datosCargados = false;
     this.getEventos();
@@ -65,5 +66,9 @@ export class ListaMultimediaComponent {
       width: '600px',
       data: {id: 0}
     });
+  }
+
+  volver() {
+    this.router.navigate(['/admin']);
   }
 }

@@ -47,7 +47,6 @@ export class CrearEditarMultimediaModalComponent {
   }
 
   ngOnInit(): void {
-    console.log("Data: ", this.data);
     this.multimediaForm = this.fb.group({
       id_evento: [this.data.id_evento, Validators.required],
       enlace_contenido: [this.data.enlace_contenido, Validators.required],
@@ -72,7 +71,6 @@ export class CrearEditarMultimediaModalComponent {
       if (this.data.id) {
         this.multimediaService.actualizarMultimedia(this.data.id, multimediaData).subscribe((resultado) => {
           this.eventUpdateService.notifyEventUpdated();
-          console.log('Editar multimedia. Resultado:', resultado);
           this.dialogRef.close(true);
         });
       } else {

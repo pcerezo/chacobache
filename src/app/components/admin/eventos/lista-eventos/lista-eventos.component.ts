@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TruncatePipe } from '../../../../truncate.pipe';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -30,7 +30,7 @@ import { EventUpdateService } from '../../../../services/event-update.service';
     RouterLink,
     ],
   templateUrl: './lista-eventos.component.html',
-  styleUrl: '../../../events/events.component.css'
+  styleUrl: './lista-eventos.component.css'
 })
 export class ListaEventosComponent implements OnInit{
   listaEventos: any[] = [];
@@ -40,7 +40,8 @@ export class ListaEventosComponent implements OnInit{
   constructor(
     private eventosService: EventsService,
     private cdr: ChangeDetectorRef,
-    private eventUpdateService: EventUpdateService
+    private eventUpdateService: EventUpdateService,
+    private router: Router
   ) {
     this.datosCargados = false;
     this.getEventos();
@@ -74,6 +75,10 @@ export class ListaEventosComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed: ' + result);
     });
+  }
+
+  volver() {
+    this.router.navigate(['/admin']);
   }
 
 }

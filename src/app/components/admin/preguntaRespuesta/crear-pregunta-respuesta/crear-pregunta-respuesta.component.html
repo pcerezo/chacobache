@@ -1,1 +1,59 @@
-<p>crear-pregunta-respuesta works!</p>
+<div class="form-container">
+    <div class="header">
+      <h2 class="text-center form-title">{{ page_title }}</h2>
+      <!--<button mat-icon-button class="close-button" (click)="volver()">
+        <mat-icon>close</mat-icon>
+      </button>-->
+    </div>
+    <form [formGroup]="preguntaRespuestaForm" (ngSubmit)="onSubmit()" class="pregunta-respuesta-form">
+      <mat-card>
+        <mat-card-content>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Asunto</mat-label>
+              <input matInput formControlName="asunto" required>
+              <mat-error *ngIf="preguntaRespuestaForm.get('asunto')?.hasError('required')">
+                El asunto es obligatorio
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Texto de la Pregunta</mat-label>
+              <textarea matInput rows="5" formControlName="texto_pregunta" required></textarea>
+              <mat-error *ngIf="preguntaRespuestaForm.get('texto_pregunta')?.hasError('required')">
+                El texto de la pregunta es obligatorio
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Texto de la Respuesta</mat-label>
+              <textarea matInput rows="5" formControlName="texto_respuesta" required></textarea>
+              <mat-error *ngIf="preguntaRespuestaForm.get('texto_respuesta')?.hasError('required')">
+                El texto de la respuesta es obligatorio
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!--<div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Fecha de Publicación</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="fecha_publicacion" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="preguntaRespuestaForm.get('fecha_publicacion')?.hasError('required')">
+                La fecha de publicación es obligatoria
+              </mat-error>
+            </mat-form-field>
+          </div>-->
+        </mat-card-content>
+        <mat-card-actions class="button-group">
+            <button mat-button type="button" class="btn btn-secondary warn-button" (click)="onCancel()">Cancelar</button>
+          <button mat-button type="submit" class="btn btn-primary green-button">Guardar</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>

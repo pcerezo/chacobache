@@ -22,7 +22,7 @@ import { CrearEditarMultimediaModalComponent } from '../crear-editar-multimedia-
 @Component({
   selector: 'app-editar-multimedia',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, MatDatepickerModule, MatSelectModule],
+  imports: [CommonModule, MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, MatDatepickerModule, MatSelectModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './editar-multimedia.component.html',
   styleUrl: './editar-multimedia.component.css'
