@@ -8,6 +8,7 @@ import { ContactoService } from '../../../services/contacto.service';
 import { Router } from '@angular/router';
 import { ListaEventosComponent } from '../../admin/eventos/lista-eventos/lista-eventos.component';
 import { EventUpdateService } from '../../../services/event-update.service';
+import { PreguntaRespuestaService } from '../../../services/pregunta-respuesta.service';
 
 @Component({
   selector: 'app-modal-button-template',
@@ -23,7 +24,7 @@ export class ModalButtonTemplateComponent {
     private eventsService: EventsService,
     private blogNoticiasService: BlogNoticiasService,
     private multimediaService: MultimediaService,
-    private contactoService: ContactoService,
+    private preguntaRespuestaService: PreguntaRespuestaService,
     private router: Router,
     private eventUpdateService: EventUpdateService,
     ) {}
@@ -52,7 +53,9 @@ export class ModalButtonTemplateComponent {
           console.log("Eliminar multimedia");
           break;
         case 4:
-          this.contactoService.eliminarPreguntaYRespuesta(this.data.idEntidad);
+          this.preguntaRespuestaService.deletePreguntaRespuesta(this.data.idEntidad).subscribe((res) => {
+            this.eventUpdateService.notifyEventUpdated();
+          });
           console.log("Eliminar preguntaYRespuesta");
           break;
       }

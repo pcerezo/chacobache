@@ -16,8 +16,9 @@ export class PreguntaRespuestaService {
     return this.http.post<any>(this.apiUrl + "crear", preguntaRespuesta);
   }
 
-  editPreguntaRespuesta(id: number, preguntaRespuesta: any): Observable<any> {
-    return this.http.put<any>(this.apiUrl + "actualizar/" + id, preguntaRespuesta);
+  editPreguntaRespuesta(preguntaRespuesta: any): Observable<any> {
+    console.log("id: " + preguntaRespuesta.id);
+    return this.http.put<any>(this.apiUrl + "actualizar/" + preguntaRespuesta.id, preguntaRespuesta);
   }
 
   deletePreguntaRespuesta(id: number): Observable<any> {

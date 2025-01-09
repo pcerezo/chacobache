@@ -13,6 +13,8 @@ import { PreguntaRespuestaService } from '../../../../services/pregunta-respuest
 import { CrearPreguntaRespuestaComponent } from '../crear-pregunta-respuesta/crear-pregunta-respuesta.component';
 import { MatDialog } from '@angular/material/dialog';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { EventUpdateService } from '../../../../services/event-update.service';
+import { ModalButtonTemplateComponent } from '../../../modals/eliminar-entidad/modal-button-template';
 
 @Component({
   selector: 'app-lista-pregunta-respuesta',
@@ -35,12 +37,17 @@ export class ListaPreguntaRespuestaComponent {
   
   constructor(
     private preguntaRespuestaService: PreguntaRespuestaService,
-    private router: Router) {
+    private router: Router,
+    private eventUpdateService: EventUpdateService
+  ) {
 
   }
 
   ngOnInit(): void {
     this.cargarPreguntasRespuestas();
+    this.eventUpdateService.eventUpdated$.subscribe(() => {
+      this.cargarPreguntasRespuestas();
+    });
   }
 
   cargarPreguntasRespuestas(): void {
@@ -59,17 +66,26 @@ export class ListaPreguntaRespuestaComponent {
   
   editPreguntaRespuesta(id: number): void {
     const data = this.listaPreguntasRespuestas.find((preguntaRespuesta) => preguntaRespuesta.id === id);
+    console.log("data: " + data?.id);
     this.dialog.open(CrearPreguntaRespuestaComponent, {
       width: '600px',
       data: data
     });
   }
 
-  deletePreguntaRespuesta(id: number): void {
-    this.preguntaRespuestaService.deletePreguntaRespuesta(id).subscribe(() => {
-      this.cargarPreguntasRespuestas();
+  deletePreguntaRespuesta(id: number, asunto: string): void {
+    const dialogRef = this.dialog.open(ModalButtonTemplateComponent, {
+      data: {tipoEntidad: 4, idEntidad: id, titulo: "Eliminar pregunta y respuesta", message: "Se eliminará la pregunta y respuesta del asunto " + asunto + ". ¿Continuar?"},
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed: ' + result);
     });
   }
+
+  openDialog(idEvento: number, tituloEvento: string): void {
+
+    }
 
   volver(): void {
     this.router.navigate(['/admin']);

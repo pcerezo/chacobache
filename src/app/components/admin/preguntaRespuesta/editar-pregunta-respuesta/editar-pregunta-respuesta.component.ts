@@ -12,6 +12,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { EventUpdateService } from '../../../../services/event-update.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-editar-pregunta-respuesta',
@@ -40,7 +42,9 @@ preguntaRespuestaForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
     private preguntasRespuestasService: PreguntaRespuestaService,
-    private router: Router
+    private router: Router,
+    private eventUpdateService: EventUpdateService,
+    public dialogRef: MatDialogRef<EditarPreguntaRespuestaComponent>
   ) {}
 
   ngOnInit(): void {
@@ -54,9 +58,12 @@ preguntaRespuestaForm!: FormGroup;
 
   onSubmit(): void {
     if (this.preguntaRespuestaForm.valid) {
+      console.log('Formulario edición enviado');
       const nuevaPreguntaRespuesta: PreguntasRespuestas = this.preguntaRespuestaForm.value;
-      this.preguntasRespuestasService.addPreguntaRespuesta(nuevaPreguntaRespuesta).subscribe(() => {
-        this.router.navigate(['/admin/preguntaRespuesta']);
+      this.preguntasRespuestasService.editPreguntaRespuesta(nuevaPreguntaRespuesta).subscribe(() => {
+        console.log('Pregunta/Respuesta actualizada');
+        this.eventUpdateService.notifyEventUpdated();
+        this.dialogRef.close(true);
       });
     }
   }

@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,6 +12,8 @@ import { PreguntaRespuestaService } from '../../../../services/pregunta-respuest
 import { PreguntasRespuestas } from '../../../../models/preguntasRespuestas';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { EventUpdateService } from '../../../../services/event-update.service';
 
 @Component({
   selector: 'app-crear-pregunta-respuesta',
@@ -40,32 +42,48 @@ export class CrearPreguntaRespuestaComponent {
   constructor(
     private fb: FormBuilder,
     private preguntasRespuestasService: PreguntaRespuestaService,
-    private router: Router
+    private router: Router,
+    public dialogRef: MatDialogRef<CrearPreguntaRespuestaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private eventUpdateService: EventUpdateService
   ) {}
 
   ngOnInit(): void {
     this.preguntaRespuestaForm = this.fb.group({
-      asunto: ['', Validators.required],
-      texto_pregunta: ['', Validators.required],
-      texto_respuesta: ['', Validators.required],
-      fecha_publicacion: ['', Validators.required]
+      id: [this.data.id],
+      asunto: [this.data.asunto, Validators.required],
+      texto_pregunta: [this.data.texto_pregunta, Validators.required],
+      texto_respuesta: [this.data.texto_respuesta, Validators.required],
+      fecha_publicacion: [this.data.fecha_publicacion, Validators.required]
     });
   }
 
   onSubmit(): void {
     if (this.preguntaRespuestaForm.valid) {
+      console.log(this.preguntaRespuestaForm.value);
       const nuevaPreguntaRespuesta: PreguntasRespuestas = this.preguntaRespuestaForm.value;
-      this.preguntasRespuestasService.addPreguntaRespuesta(nuevaPreguntaRespuesta).subscribe(() => {
-        this.router.navigate(['/admin/preguntaRespuesta']);
-      });
+      if (nuevaPreguntaRespuesta.id == undefined || nuevaPreguntaRespuesta.id == 0) {
+        this.preguntasRespuestasService.addPreguntaRespuesta(nuevaPreguntaRespuesta).subscribe(() => {
+          this.eventUpdateService.notifyEventUpdated();
+          this.dialogRef.close(true);
+        });
+      }
+      else {
+        this.preguntasRespuestasService.editPreguntaRespuesta(nuevaPreguntaRespuesta).subscribe(() => {
+          this.eventUpdateService.notifyEventUpdated();
+          this.dialogRef.close(true);
+        });
+      }
     }
   }
 
   onCancel(): void {
-    this.router.navigate(['/admin/preguntaRespuesta']);
+    this.dialogRef.close(true);
+    this.router.navigate(['/admin/faq']);
   }
 
   volver(): void {
+    this.dialogRef.close(true);
     this.router.navigate(['/admin']);
   }
 }
