@@ -1,0 +1,14 @@
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#qr-image {
+    width: 100%;
+    height: auto;
+}

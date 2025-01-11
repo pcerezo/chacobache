@@ -1,13 +1,12 @@
 <div class="header d-flex justify-content-between align-items-center p-3">
-    <div class="d-flex col align-items-center">
+    <div class="d-flex col align-items-center flex-column flex-sm-row">
         <div class="logo-circle"></div>
-        <div class="ms-3">
-            <!--<h1 class="text-white">CHACOBACHE</h1> -->
+        <div class="ms-3 d-block">
             <p class="subtitle text-black mb-0">Producción Musical</p>
         </div>
     </div>
     <div class="d-flex align-items-center">
-        <button class="btn btn-secondary me-2">Compartir</button>
+        <button class="btn btn-secondary me-2" (click)="mostrarModalQR()">Compartir</button>
         <!--<img src="assets/qrcode.png" class="qr-code"> -->
     </div>
 </div>

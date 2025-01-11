@@ -1,7 +1,9 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, DoCheck, Inject, PLATFORM_ID } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ModalQRComponent } from '../modals/modal-qr/modal-qr.component';
 
 @Component({
   selector: 'app-header',
@@ -15,8 +17,12 @@ export class HeaderComponent implements DoCheck{
 
   private subscription!: Subscription;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
-  }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object, 
+    private router: Router,
+    private dialog: MatDialog
+    ) 
+    {}
 
   ngDoCheck(): void {
     if (typeof localStorage !== 'undefined') {
@@ -33,6 +39,10 @@ export class HeaderComponent implements DoCheck{
         this.token = null;
       }
     }
+  }
+
+  mostrarModalQR() {
+    this.dialog.open(ModalQRComponent);
   }
 
   logout() {
