@@ -11,7 +11,7 @@ import { PreguntaRespuestaService } from '../../../services/pregunta-respuesta.s
 @Component({
   selector: 'app-modal-qr',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+  imports: [MatButtonModule],
   templateUrl: './modal-qr.component.html',
   styleUrl: './modal-qr.component.css'
 })

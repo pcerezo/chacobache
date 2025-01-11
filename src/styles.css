@@ -1,4 +1,4 @@
-body {
+/*body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
@@ -52,7 +52,7 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
-
+*/
 .nav-link.active {
     font-weight: bold;
     color: #fff; /* Puedes cambiar esto a cualquier color que quieras para el estado activo */
@@ -60,15 +60,144 @@ footer {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/*
-app-blog-noticias, app-integrantes, app-events, app-conciertos-vivo, app-otras-producciones, app-contacto, .principal {
-    min-height: 80vh;   // Ocupa mínimo la altura del viewport 
-    display: flex;
-    flex-direction: column;
-}*/
-
 .principal {
     min-height: 80vh;   /* Ocupa mínimo la altura del viewport */
     display: flex;
     flex-direction: column;
 }
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif; /* Fuente general */
+    font-size: 16px;
+    overflow-x: hidden; /* Evitar desplazamiento horizontal */
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  /* Layout principal */
+  app-root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Encabezado */
+  app-header {
+    width: 100%;
+    /*display: flex;
+    flex-wrap: wrap;*/
+    justify-content: space-between;
+    align-items: center;
+    /*padding: 10px 20px;*/
+    background-color: #212529;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  app-header img {
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: contain;
+  }
+  
+  /* Menú de navegación */
+
+  
+  nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Footer */
+  app-footer {
+    width: 100%;
+    text-align: center;
+    /*padding: 10px 20px;
+    /*background-color: #121212;*/
+    color: white;
+    margin-top: auto;
+  }
+  
+  /* Contenido principal */
+  router-outlet {
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Imágenes */
+  /*img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }*/
+  
+  /* Sección adaptable */
+  section {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Media Queries para pantallas pequeñas */
+  @media (max-width: 768px) {
+    app-header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    nav {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    section {
+      padding: 10px;
+    }
+  }
+  
+  /* Media Queries para pantallas muy pequeñas (teléfonos compactos) */
+  @media (max-width: 480px) {
+    body {
+      font-size: 14px; /* Reducir tamaño de fuente en pantallas pequeñas */
+    }
+  
+    app-header {
+      padding: 10px;
+    }
+  
+    nav {
+      gap: 5px;
+    }
+  
+    section {
+      padding: 5px;
+    }
+  }
+  
