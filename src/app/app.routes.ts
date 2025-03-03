@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { provideRouter, Routes, withHashLocation } from '@angular/router';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { IntegrantesComponent } from './components/integrantes/integrantes.component';
 import { EventsComponent } from './components/events/events.component';
@@ -51,3 +51,6 @@ export const routes: Routes = [
     
     {path: '**', component: Error404Component }
 ];
+
+export const appRoutingProviders: any[] = [];
+export const routing = provideRouter(routes, withHashLocation());
