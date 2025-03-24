@@ -25,7 +25,7 @@ jobs:
     
     - name: Reemplazar URL de la API en environment.ts
       run: |
-        sed -i 's|apiUrl:.*|apiUrl: "\${API_URL}"|g' src/environments/environment.ts
+        sed -i 's|apiUrl:.*|apiUrl: "\${API_URL}"|g' src/app/environments/environment.ts
     
     - name: Build image and push
       run: |
