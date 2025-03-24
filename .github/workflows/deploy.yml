@@ -54,9 +54,9 @@ jobs:
       - name: Reemplazar la URL del backend en environment.ts
         run: |
           echo "export const environment = {" > src/app/environments/environment.ts
-          echo "  production: true," >> src/environments/environment.ts
-          echo "  backendUrl: '${{ secrets.API_URL }}'" >> src/environments/environment.ts
-          echo "};" >> src/environments/environment.ts
+          echo "  production: true," >> src/app/environments/environment.ts
+          echo "  backendUrl: '${{ secrets.API_URL }}'" >> src/app/environments/environment.ts
+          echo "};" >> src/app/environments/environment.ts
 
       # 3. Ejecutar el build del frontend Angular
       - name: Build Angular App
