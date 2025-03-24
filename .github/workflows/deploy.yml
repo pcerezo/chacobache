@@ -55,7 +55,7 @@ jobs:
         run: |
           echo "export const environment = {" > src/app/environments/environment.ts
           echo "  production: true," >> src/app/environments/environment.ts
-          echo "  backendUrl: '${{ secrets.API_URL }}'" >> src/app/environments/environment.ts
+          echo "  apiUrl: '${{ secrets.API_URL }}'" >> src/app/environments/environment.ts
           echo "};" >> src/app/environments/environment.ts
 
       # 3. Ejecutar el build del frontend Angular
