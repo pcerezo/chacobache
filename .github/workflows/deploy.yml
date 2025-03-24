@@ -9,6 +9,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      API_URL: ${{ secrets.API_URL }}
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -19,6 +22,10 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.CHACO_TOKEN_2 }}
+    
+    - name: Reemplazar URL de la API en environment.ts
+      run: |
+        sed -i 's|apiUrl:.*|apiUrl: "\${API_URL}"|g' src/environments/environment.ts
     
     - name: Build image and push
       run: |

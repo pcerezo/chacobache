@@ -1,11 +1,20 @@
 {
   "routes": [
+    "/admin",
+    "/admin/articulos",
+    "/admin/articulos/crearArticulo",
+    "/admin/eventos",
+    "/admin/eventos/crearEvento",
+    "/admin/faq",
+    "/admin/multimedia",
+    "/admin/multimedia/crearMultimedia",
     "/blogNoticias",
     "/conciertosEnVivo",
     "/contacto",
     "/eventos",
     "/inicio",
     "/integrantes",
+    "/login",
     "/otrasProducciones"
   ]
 }
