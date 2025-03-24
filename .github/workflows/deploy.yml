@@ -58,6 +58,7 @@ jobs:
           echo "  apiUrl: '${{ secrets.API_URL }}'" >> src/app/environments/environment.ts
           echo "};" >> src/app/environments/environment.ts
 
+          
       # 3. Ejecutar el build del frontend Angular
       - name: Build Angular App
         run: |
