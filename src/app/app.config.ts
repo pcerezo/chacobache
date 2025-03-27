@@ -11,4 +11,4 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withHashLocation()), provideClientHydration(), provideAnimationsAsync(), provideHttpClient(withFetch())]
 };
 
-export const BACKEND: String = "https://51.44.165.123:5000";
+export const BACKEND: String = "http://51.44.165.123:5000";
